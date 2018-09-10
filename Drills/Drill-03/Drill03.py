@@ -10,7 +10,6 @@ x = 400
 y = 90
 
 angle = -90
-
 dir = 0
 # 0 = right, 1 = up, 2 =left, 3 = down
 
