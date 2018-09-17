@@ -23,9 +23,11 @@ def move_character():
 
     x = x + (Arr_position[nextIndex][0] - Arr_position[currentIndex][0]) * 0.05
     y = y + (Arr_position[nextIndex][1] - Arr_position[currentIndex][1]) * 0.05
-    
+
     xCheck = Arr_position[nextIndex][0]*0.95 < x <= Arr_position[nextIndex][0] * 1.05
     yCheck = Arr_position[nextIndex][1]*0.95 < y <= Arr_position[nextIndex][1] * 1.05
+
+    Change_Direction()
 
     if xCheck and yCheck:
         PosIndex["Next"] = PosIndex["Next"] + 1
@@ -58,6 +60,8 @@ def draw():
 
     pass
 
+def Change_Direction():
+    pass
 
 while True:
     move_character()
