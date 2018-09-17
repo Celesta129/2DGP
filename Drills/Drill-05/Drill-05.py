@@ -14,8 +14,19 @@ y = Arr_position[0][1]
 
 
 def move_character():
+    move_Horizon()
+    delay(0.5)
+    move_Vertical()
+
     pass
 
+def move_Horizon():
+    draw()
+    pass
+
+def move_Vertical():
+    draw()
+    pass
 
 def draw():
     global frame
@@ -32,7 +43,7 @@ def draw():
 
     update_canvas()
     frame = (frame + 1) % 8
-
+    delay(0.05)
     pass
 
 
@@ -47,9 +58,6 @@ def Change_Direction(CurrentPos,NextPos):
 
 while True:
     move_character()
-    draw()
-
-    delay(0.05)
     get_events()
     pass
 
