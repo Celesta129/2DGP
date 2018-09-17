@@ -16,14 +16,17 @@ y = Arr_position[0][1]
 def move_character():
     currentX = Arr_position[PosIndex["Current"]]
     nextX = Arr_position[PosIndex["Next"]]
-    Change_Direction(currentX,nextX)
 
+    Change_Direction(currentX,nextX)
     move_Horizon()
     delay(0.5)
     move_Vertical()
+    change_Index()
 
     pass
-
+def change_Index():
+    
+    pass
 def move_Horizon():
     global x
     global PosIndex
@@ -41,7 +44,19 @@ def move_Horizon():
     pass
 
 def move_Vertical():
-    draw()
+    global y
+    global PosIndex
+    global Arr_position
+
+    currentY = Arr_position[PosIndex["Current"]][1]
+    nextY = Arr_position[PosIndex["Next"]][1]
+
+    while y != nextY:
+        if currentY > nextY:
+            y = y - 1
+        else:
+            y = y + 1
+        draw()
     pass
 
 def draw():
@@ -59,7 +74,7 @@ def draw():
 
     update_canvas()
     frame = (frame + 1) % 8
-    delay(0.05)
+    delay(0.01)
     get_events()
     pass
 
