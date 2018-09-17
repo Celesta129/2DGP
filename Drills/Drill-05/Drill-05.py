@@ -25,7 +25,12 @@ def move_character():
 
     pass
 def change_Index():
-    
+    global PosIndex
+
+    PosIndex["Current"] = PosIndex["Next"]
+    PosIndex["Next"] = PosIndex["Next"] + 1
+    if PosIndex["Next"] == 10:
+        PosIndex["Next"] = 0
     pass
 def move_Horizon():
     global x
