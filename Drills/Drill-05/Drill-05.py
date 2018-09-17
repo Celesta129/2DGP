@@ -16,8 +16,34 @@ y = Arr_position[0][1]
 def move_character():
     pass
 
+
 def draw():
+    global frame
+    global x
+    global y
+
+    clear_canvas()
+    grass.draw(400, 30)
+
+    if direction == "Left":
+        character.clip_draw(frame * 100, 0, 100, 100, x, y)
+    else:
+        character.clip_draw(frame * 100, 100, 100, 100, x, y)
+
+    update_canvas()
+    frame = (frame + 1) % 8
+
     pass
+
+
+def Change_Direction(CurrentPos,NextPos):
+    global direction
+    if(CurrentPos > NextPos):
+        direction = "Left"
+    else:
+        direction = "Right"
+    pass
+
 
 while True:
     move_character()
