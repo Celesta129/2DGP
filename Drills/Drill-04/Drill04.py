@@ -25,6 +25,7 @@ while(True):
     elif x == 0:
         dir = 90
     delay(0.05)
+
     get_events()
 
 close_canvas()
