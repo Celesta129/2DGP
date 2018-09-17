@@ -3,8 +3,8 @@ open_canvas()
 character = load_image("animation_sheet.png")
 grass = load_image("grass.png")
 
-Arr_position = [(203.0, 535.0), (132.0, 243.0), (535.0, 470.0), (477.0, 203.0), (715.0, 136.0),
-            (316.0, 225.0), (510.0, 92.0), (692.0, 518.0), (682.0, 336.0), (712.0, 349.0)]
+Arr_position = [(203, 535), (132, 243), (535, 470), (477, 203), (715, 136),
+            (316, 225), (510, 92), (692, 518), (682, 336), (712, 349)]
 
 frame = 0
 PosIndex = {"Current" : 0, "Next" : 1}
@@ -14,6 +14,10 @@ y = Arr_position[0][1]
 
 
 def move_character():
+    currentX = Arr_position[PosIndex["Current"]]
+    nextX = Arr_position[PosIndex["Next"]]
+    Change_Direction(currentX,nextX)
+
     move_Horizon()
     delay(0.5)
     move_Vertical()
@@ -21,7 +25,19 @@ def move_character():
     pass
 
 def move_Horizon():
-    draw()
+    global x
+    global PosIndex
+    global Arr_position
+
+    currentX = Arr_position[PosIndex["Current"]][0]
+    nextX = Arr_position[PosIndex["Next"]][0]
+
+    while x != nextX:
+        if currentX > nextX:
+            x = x - 1
+        else:
+            x = x + 1
+        draw()
     pass
 
 def move_Vertical():
@@ -44,6 +60,7 @@ def draw():
     update_canvas()
     frame = (frame + 1) % 8
     delay(0.05)
+    get_events()
     pass
 
 
@@ -58,7 +75,7 @@ def Change_Direction(CurrentPos,NextPos):
 
 while True:
     move_character()
-    get_events()
+
     pass
 
 close_canvas()
