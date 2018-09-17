@@ -3,17 +3,40 @@ open_canvas()
 character = load_image("animation_sheet.png")
 grass = load_image("grass.png")
 
-Arr_position = [(203, 535), (132, 243), (535, 470), (477, 203), (715, 136),
-            (316, 225), (510, 92), (692, 518), (682, 336), (712, 349)]
+Arr_position = [(203.0, 535.0), (132.0, 243.0), (535.0, 470.0), (477.0, 203.0), (715.0, 136.0),
+            (316.0, 225.0), (510.0, 92.0), (692.0, 518.0), (682.0, 336.0), (712.0, 349.0)]
 
 frame = 0
-posNumber = 0
+PosIndex = {"Current" : 0, "Next" : 1}
 direction = "Right"
-x = Arr_position[posNumber][0]
-y = Arr_position[posNumber][1]
+x = Arr_position[0][0]
+y = Arr_position[0][1]
 
 
 def move_character():
+    global x
+    global y
+    global PosIndex
+
+    nextIndex = PosIndex["Next"]
+    currentIndex = PosIndex["Current"]
+
+    x = x + (Arr_position[nextIndex][0] - Arr_position[currentIndex][0]) * 0.05
+    y = y + (Arr_position[nextIndex][1] - Arr_position[currentIndex][1]) * 0.05
+    
+    xCheck = Arr_position[nextIndex][0]*0.95 < x <= Arr_position[nextIndex][0] * 1.05
+    yCheck = Arr_position[nextIndex][1]*0.95 < y <= Arr_position[nextIndex][1] * 1.05
+
+    if xCheck and yCheck:
+        PosIndex["Next"] = PosIndex["Next"] + 1
+        PosIndex["Current"] = PosIndex["Current"] +1
+        if PosIndex["Next"] == 10:
+            PosIndex["Next"] = 0
+
+        if PosIndex["Current"] == 10:
+            PosIndex["Current"] = 0
+        pass
+
     pass
 
 
@@ -21,7 +44,6 @@ def draw():
     global frame
     global x
     global y
-    global posNumber
 
     clear_canvas()
     grass.draw(400, 30)
