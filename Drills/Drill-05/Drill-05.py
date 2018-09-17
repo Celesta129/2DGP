@@ -13,6 +13,7 @@ x = Arr_position[0][0]
 y = Arr_position[0][1]
 
 
+
 def move_character():
     currentX = Arr_position[PosIndex["Current"]]
     nextX = Arr_position[PosIndex["Next"]]
