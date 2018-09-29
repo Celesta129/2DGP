@@ -35,7 +35,7 @@ def run_charactor():
     elif x < nextPosX:
         x += 1
     if nextPosY > y:
-       y +=1
+       y += 1
     elif nextPosY < y:
         y -=1
 
