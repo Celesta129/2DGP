@@ -13,11 +13,11 @@ ground = load_image('KPU_GROUND.png')
 
 frame = 0
 param = 0
+n = 1
+points = [(random.randint(100,700),random.randint(50,550)) for n in range(20)]
 
-points = [(random.randint(-350,350),random.randint(-250,250)) for n in range(20)]
-
-characterX = points[0][0]
-characterY = points[0][1]
+characterX = points[n-1][0]
+characterY = points[n-1][1]
 
 
 def draw():
@@ -32,10 +32,17 @@ def draw():
 
 
 def move_character():
+    global characterX, characterY
     global param
-
-
+    global points
+    global n
     param += 0.01
+    if param > 1:
+        param = 0
+        n = (n + 1) % len(points)
+
+    characterX = points[n-1][0] * (1 - param) + points[n][0] * param
+    characterY = points[n-1][1] * (1 - param) + points[n][1] * param
     pass
 
 
