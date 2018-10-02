@@ -19,14 +19,20 @@ points = [(random.randint(100,700),random.randint(50,550)) for n in range(20)]
 characterX = points[n-1][0]
 characterY = points[n-1][1]
 
+direction = 'Right'
 
 def draw():
     global characterX, characterY
+    global frame
     clear_canvas()
     ground.draw(400,300)
-    character.clip_draw(frame * 100,0,100,100, characterX, characterY)
+    if direction == 'Left':
+        character.clip_draw(frame * 100,0,100,100, characterX, characterY)
+    else:
+        character.clip_draw(frame * 100, 100, 100, 100, characterX, characterY)
     update_canvas()
     delay(0.01)
+    frame = (frame+1) % 8
     get_events()
     pass
 
@@ -36,6 +42,12 @@ def move_character():
     global param
     global points
     global n
+    global direction
+
+    if points[n-1][0] < points[n][0]:
+        direction = 'Right'
+    else:
+        direction = 'Left'
     param += 0.01
     if param > 1:
         param = 0
