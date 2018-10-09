@@ -1,4 +1,5 @@
 from pico2d import *
+import random
 
 # Game object class here
 class Boy:
@@ -24,6 +25,12 @@ class Grass:
         self.image.draw(400, 30)
     pass
 
+class Ball:
+    def __init(self):
+        pass
+
+    def draw(self):
+        pass
 
 def handle_events():
     global running
