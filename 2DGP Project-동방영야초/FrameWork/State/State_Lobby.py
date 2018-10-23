@@ -1,25 +1,23 @@
 from pico2d import *
 from FrameWork import MainFrameWork
 
+image_Lobby = None
 
-name = "State_Logo"
-
-image_logo = None
-
+name = "State_Lobby"
 
 def enter():
-    global image_logo
-    image_logo = load_image("Menu.png")
+    global image_Lobby
+    image_Lobby = load_image("Menu.png")
 
-    if (image_logo == None):
+    if (image_Lobby == None):
         a = 1
 
     pass
 
 
 def exit():
-    global image_logo
-    del(image_logo)
+    global image_Lobby
+    del(image_Lobby)
 
 
 
@@ -46,8 +44,8 @@ def update():
 
 
 def draw():
-    global image_logo
+    global image_Lobby
     clear_canvas()
-    image_logo.clip_draw(688,500,800,600,400,300,860,810)
+    #image_Lobby.clip_draw(14,528,800,600,400,300,1400,810)
     update_canvas()
     pass

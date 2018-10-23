@@ -2,8 +2,10 @@ import pico2d
 
 from FrameWork import MainFrameWork
 from FrameWork.State import State_Logo
+from FrameWork.State import State_Lobby
 
-State_Current = State_Logo
+State_Current = State_Lobby
+
 
 def Run():
     pico2d.open_canvas( )
