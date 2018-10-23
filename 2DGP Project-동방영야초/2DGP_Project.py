@@ -4,7 +4,7 @@ from FrameWork import MainFrameWork
 from FrameWork.State import State_Logo
 from FrameWork.State import State_Lobby
 
-State_Current = State_Lobby
+State_Current = State_Logo
 
 
 def Run():

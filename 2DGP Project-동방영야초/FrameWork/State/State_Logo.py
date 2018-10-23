@@ -9,12 +9,9 @@ image_logo = None
 
 def enter():
     global image_logo
-    image_logo = load_image("Menu.png")
 
-    if (image_logo == None):
-        a = 1
-
-    pass
+    if image_logo == None:
+        image_logo = load_image("Menu.png")
 
 
 def exit():
@@ -48,6 +45,8 @@ def update():
 def draw():
     global image_logo
     clear_canvas()
-    image_logo.clip_draw(688,500,800,600,400,300,860,810)
+   # image_logo.clip_draw(688,500,800,600,400,300,860,810)
+    image_logo.clip_draw(688,578,640,480,400,300,800,600)
+
     update_canvas()
     pass
