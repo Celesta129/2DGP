@@ -30,15 +30,17 @@ class CObject:
 
 class CPlayer:
     Player_image = None
-    def __init__(self):
+    def __init__(self,x,y):
         self.ObjectInfo = CObject()
         if CPlayer.Player_image == None:
-            self.image = load_image("Players.png")
-
-        self.ObjectInfo.width = 100
-        self.ObjectInfo.height = 100
+            CPlayer.Player_image = load_image("Players.png")
+        self.ObjectInfo.x = x
+        self.ObjectInfo.y = y
+        self.ObjectInfo.image = CPlayer.Player_image
         self.ObjectInfo.image_width = 100
         self.ObjectInfo.image_height = 100
+        self.ObjectInfo.image_left = 28
+        self.ObjectInfo.image_bottom = CPlayer.Player_image.h - 36
 
     def draw(self):
         self.ObjectInfo.draw()
@@ -56,9 +58,7 @@ def enter():
     global image_Main_BG
     global player
     if player == None:
-        player = CPlayer()
-        CPlayer.x = 400
-        CPlayer.y = 300
+        player = CPlayer(400,300)
         pass
     if image_Main_BG == None:
         image_Main_BG = load_image("MainBackGround.png")
