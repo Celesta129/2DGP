@@ -1,72 +1,34 @@
 from pico2d import *
 from FrameWork import MainFrameWork
-#from FrameWork.Class.CPlayer import CPlayer
-class CObject:
-    def __init__(self, w = None, h = None):
-        self.x,self.y = 0,0
-        self.image_width = 0
-        self.image_height = 0
-        self.width = None
-        self.height = None
-        self.image = None
-        self.image_left = 0
-        self.image_bottom = 0
-        if(w == None):
-            self.Width = self.image_width
-        if(h == None):
-            self.Height = self.image_height
-
-    def draw(self):
-        if self.image != None:
-            self.image.clip_draw(self.image_left, self.image_bottom,
-                                 self.image_width ,self.image_height,
-                                 self.x, self.y,
-                                 self.width,self.height)
-        pass
-
-    def update(self):
-        pass
-
-
-class CPlayer:
-    Player_image = None
-    def __init__(self,x,y):
-        self.ObjectInfo = CObject()
-        if CPlayer.Player_image == None:
-            CPlayer.Player_image = load_image("Players.png")
-        self.ObjectInfo.x = x
-        self.ObjectInfo.y = y
-        self.ObjectInfo.image = CPlayer.Player_image
-        self.ObjectInfo.image_width = 100
-        self.ObjectInfo.image_height = 100
-        self.ObjectInfo.image_left = 28
-        self.ObjectInfo.image_bottom = CPlayer.Player_image.h - 36
-
-    def draw(self):
-        self.ObjectInfo.draw()
-
+from FrameWork.CPlayer import cPlayer
 
 name = "State_Stage"
 
 image_Main_BG = None
 image_Background = None
-Background_Scroll_y = 0
+
+Stage_image = None
+Stage_Scroll_y = 0
 
 player = None
 
 def enter():
     global image_Main_BG
     global player
+    global Stage_image
     if player == None:
-        player = CPlayer(400,300)
+        player = cPlayer(400,300)
         pass
     if image_Main_BG == None:
         image_Main_BG = load_image("MainBackGround.png")
-
+    if Stage_image == None:
+        Stage_image = load_image("Stage Character Background Text.png")
 
 def exit():
     global image_Main_BG
+    global player
     del(image_Main_BG)
+    del(player)
 
 
 
@@ -85,10 +47,13 @@ def handle_events():
             MainFrameWork.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             MainFrameWork.quit()
+        else:
+            player.handle_event(event)
     pass
 
 
 def update():
+    player.update()
     pass
 
 

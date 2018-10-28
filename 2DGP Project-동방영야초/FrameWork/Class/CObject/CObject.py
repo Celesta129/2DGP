@@ -1,5 +1,0 @@
-name = "class_Object"
-
-
-
-
