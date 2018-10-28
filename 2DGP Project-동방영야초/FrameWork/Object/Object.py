@@ -1,5 +1,7 @@
 from pico2d import *
 
+name = "class_Object"
+
 class Object:
     def __init__(self):
         self.x,self.y = 0,0
@@ -15,5 +17,3 @@ class Object:
 
     def update(self):
         pass
-
-    pass
