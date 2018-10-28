@@ -3,6 +3,9 @@ from FrameWork import MainFrameWork
 
 image_Lobby = None
 
+Logo_left = 1092
+Logo_bottom = 998
+Logo_width,Logo_height = 220,380
 name = "State_Lobby"
 
 def enter():
@@ -52,3 +55,4 @@ def draw():
 def draw_background():
     if image_Lobby != None:
         image_Lobby.clip_draw(14, image_Lobby.h - 529, 640, 480, 400, 300, 800, 600)
+        image_Lobby.clip_draw(Logo_left,image_Lobby.h - Logo_bottom,Logo_width,Logo_height, 650,325, Logo_width, 450)

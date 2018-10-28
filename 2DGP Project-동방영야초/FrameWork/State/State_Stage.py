@@ -63,6 +63,24 @@ def update():
     player.update(list_pTe)
     for object in list_objects:
         object.update(list_eTp)
+
+    for bullet in list_pTe:
+        bullet.update()
+    for bullet in list_eTp:
+        bullet.update()
+
+    i = 0
+    for bullet in list_pTe:
+        if list_pTe[i].ObjectInfo.y >= 650 or list_pTe[i].ObjectInfo.y <= -50:
+            _bullet = list_pTe.pop(i)
+            del(_bullet)
+        i += 1
+    i = 0
+    for bullet in list_eTp:
+        if list_eTp[i].ObjectInfo.y >= 650 or list_eTp[i].ObjectInfo.y <= -50:
+            _bullet = list_eTp.pop(i)
+            del (_bullet)
+        i += 1
     pass
 
 
