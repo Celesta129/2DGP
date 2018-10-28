@@ -2,7 +2,7 @@ from pico2d import *
 from FrameWork.CObject import cObject
 from FrameWork.CBullet import *
 
-RIGHT_DOWN, LEFT_DOWN, UP_DOWN, DOWN_DOWN, RIGHT_UP, LEFT_UP, UP_UP, DOWN_UP,  = range(8)
+RIGHT_DOWN, LEFT_DOWN, UP_DOWN, DOWN_DOWN, RIGHT_UP, LEFT_UP, UP_UP, DOWN_UP, X_DOWN, X_UP  = range(10)
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
     (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
@@ -11,7 +11,9 @@ key_event_table = {
     (SDL_KEYUP, SDLK_RIGHT): RIGHT_UP,
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
     (SDL_KEYUP, SDLK_UP): UP_UP,
-    (SDL_KEYUP, SDLK_DOWN): DOWN_UP
+    (SDL_KEYUP, SDLK_DOWN): DOWN_UP,
+    (SDL_KEYDOWN, SDLK_x) : X_DOWN,
+    (SDL_KEYUP, SDLK_x): X_UP,
 }
 
 
@@ -32,8 +34,9 @@ class IdleState:
         Player.ObjectInfo.frame = (Player.ObjectInfo.frame +1) % 4
         Player.ObjectInfo.y += Player.ObjectInfo.velocity[1]
 
-        Bullet = cBullet(Player.ObjectInfo.x,Player.ObjectInfo.y,"P",ZACO1)
-        _bullet_list.insert(0,Bullet)
+        if Player.shot == True:
+            Bullet = cBullet(Player.ObjectInfo.x, Player.ObjectInfo.y, "P", ZACO1)
+            _bullet_list.insert(0, Bullet)
     @staticmethod
     def draw(Player):
         Player.draw()
@@ -54,8 +57,9 @@ class MoveState:
         Player.ObjectInfo.x += Player.ObjectInfo.velocity[0]
         Player.ObjectInfo.y += Player.ObjectInfo.velocity[1]
 
-        Bullet = cBullet(Player.ObjectInfo.x, Player.ObjectInfo.y, "P", ZACO2)
-        _bullet_list.insert(0, Bullet)
+        if Player.shot == True:
+            Bullet = cBullet(Player.ObjectInfo.x, Player.ObjectInfo.y, "P", ZACO2)
+            _bullet_list.insert(0, Bullet)
     @staticmethod
     def draw(Player):
         Player.draw()
@@ -65,12 +69,16 @@ next_state_table = {
     IdleState: {RIGHT_UP : MoveState, LEFT_UP: MoveState,
                 UP_UP : MoveState, DOWN_UP : MoveState,
                 RIGHT_DOWN: MoveState, LEFT_DOWN: MoveState,
-                UP_DOWN: MoveState, DOWN_DOWN: MoveState },
+                UP_DOWN: MoveState, DOWN_DOWN: MoveState,
+                X_DOWN: IdleState, X_UP: IdleState
+                },
 
-    MoveState: {RIGHT_UP : IdleState, LEFT_UP: IdleState,
-                UP_UP : IdleState, DOWN_UP : IdleState,
-                RIGHT_DOWN: IdleState, LEFT_DOWN: IdleState,
-                UP_DOWN: IdleState, DOWN_DOWN: IdleState}
+    MoveState: {RIGHT_UP : MoveState, LEFT_UP: MoveState,
+                UP_UP : MoveState, DOWN_UP : MoveState,
+                RIGHT_DOWN: MoveState, LEFT_DOWN: MoveState,
+                UP_DOWN: MoveState, DOWN_DOWN: MoveState,
+                X_DOWN: MoveState, X_UP: MoveState
+                }
 }
 
 name = "class_Player"
@@ -95,6 +103,9 @@ class cPlayer:
 
         self.event_que = []
         self.cur_state = IdleState
+
+        self.shot = False
+
     def add_event(self, event):
         self.event_que.insert(0,event)
 
@@ -134,7 +145,13 @@ class cPlayer:
                 self.ObjectInfo.flip = True
             else:
                 self.ObjectInfo.flip = False
+
             self.add_event(key_event)
+
+            if(key_event == X_DOWN):
+                self.shot = True
+            elif key_event == X_UP:
+                self.shot = False
         pass
 
     def draw(self):

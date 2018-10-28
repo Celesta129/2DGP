@@ -68,9 +68,15 @@ def update():
 
 def draw():
     global image_Main_BG
+    global list_pTe
+    global list_eTp
     clear_canvas()
 
     image_Main_BG.clip_draw(0,0,121,159,400,300,800,600)
     player.draw()
+    for bullet in list_pTe:
+        bullet.draw()
+    for bullet in list_eTp:
+        bullet.draw()
     update_canvas()
     pass
