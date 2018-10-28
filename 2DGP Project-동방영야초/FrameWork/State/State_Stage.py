@@ -12,6 +12,10 @@ Stage_Scroll_y = 0
 
 player = None
 
+list_objects = []
+list_pTe = []
+list_eTp = []
+
 def enter():
     global image_Main_BG
     global player
@@ -54,6 +58,8 @@ def handle_events():
 
 def update():
     player.update()
+    for object in list_objects:
+        object.update()
     pass
 
 

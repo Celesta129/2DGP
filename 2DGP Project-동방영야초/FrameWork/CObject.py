@@ -1,6 +1,6 @@
 name = "class_Object"
 
-
+import math
 
 class cObject:
     def __init__(self, w = None, h = None):
@@ -23,10 +23,17 @@ class cObject:
 
     def draw(self):
         if self.image != None:
-            self.image.clip_draw(self.image_left + self.frame_offset* self.frame, self.image_bottom,
-                                 self.image_width ,self.image_height,
-                                 self.x, self.y,
-                                 self.width,self.height)
+            #self.image.clip_draw(self.image_left + self.frame_offset* self.frame, self.image_bottom,
+            #                     self.image_width ,self.image_height,
+            #                     self.x, self.y,
+            #                     self.width,self.height)
+            self.image.clip_composite_draw(self.image_left + self.frame_offset * self.frame, self.image_bottom,
+                                 self.image_width, self.image_height,
+                                 math.radians(180), 'h',
+                                 self.x, self.y)
+
+
+            #left, bottom, width, height, rad, flip, x, y
         pass
 
     def update(self):
