@@ -57,9 +57,12 @@ def handle_events():
 
 
 def update():
-    player.update()
+    global list_pTe
+    global list_eTp
+
+    player.update(list_pTe)
     for object in list_objects:
-        object.update()
+        object.update(list_eTp)
     pass
 
 

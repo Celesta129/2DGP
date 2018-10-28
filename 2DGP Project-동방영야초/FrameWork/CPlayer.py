@@ -1,5 +1,7 @@
 from pico2d import *
 from FrameWork.CObject import cObject
+from FrameWork.CBullet import *
+
 RIGHT_DOWN, LEFT_DOWN, UP_DOWN, DOWN_DOWN, RIGHT_UP, LEFT_UP, UP_UP, DOWN_UP,  = range(8)
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -26,10 +28,12 @@ class IdleState:
         pass
 
     @staticmethod
-    def do(Player):
+    def do(Player,_bullet_list):
         Player.ObjectInfo.frame = (Player.ObjectInfo.frame +1) % 4
         Player.ObjectInfo.y += Player.ObjectInfo.velocity[1]
 
+        Bullet = cBullet(Player.ObjectInfo.x,Player.ObjectInfo.y,"P",ZACO1)
+        _bullet_list.insert(0,Bullet)
     @staticmethod
     def draw(Player):
         Player.draw()
@@ -45,12 +49,13 @@ class MoveState:
         pass
 
     @staticmethod
-    def do(Player):
-
+    def do(Player,_bullet_list):
         Player.ObjectInfo.frame = (Player.ObjectInfo.frame + 1) % 7
         Player.ObjectInfo.x += Player.ObjectInfo.velocity[0]
         Player.ObjectInfo.y += Player.ObjectInfo.velocity[1]
 
+        Bullet = cBullet(Player.ObjectInfo.x, Player.ObjectInfo.y, "P", ZACO2)
+        _bullet_list.insert(0, Bullet)
     @staticmethod
     def draw(Player):
         Player.draw()
@@ -93,8 +98,8 @@ class cPlayer:
     def add_event(self, event):
         self.event_que.insert(0,event)
 
-    def update(self):
-        self.cur_state.do(self)
+    def update(self, _bullet_list):
+        self.cur_state.do(self,_bullet_list)
         if len(self.event_que) > 0 :
             event = self.event_que.pop()
             self.change_state(next_state_table[self.cur_state][event])

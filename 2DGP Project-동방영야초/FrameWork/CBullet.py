@@ -2,9 +2,10 @@ from pico2d import *
 from FrameWork.CObject import cObject
 ZACO1, ZACO2  = range(2)
 # left, bottom, width, height
-bullet_image_table = {(0,0,50,50):ZACO1,
-                      (0,0,50,50):ZACO2
-                      }
+
+bullet_image_table = { ZACO1 : (0, 0, 50, 50),
+                        ZACO2  :(0, 0, 50, 50)
+                          }
 
 name = "class_Bullet"
 
@@ -29,17 +30,15 @@ class cBullet:
         self.ObjectInfo.x = x
         self.ObjectInfo.y = y
 
-        self.ObjectInfo.image_width = Bullet_image[2]
-        self.ObjectInfo.image_height = Bullet_image[3]
+        self.ObjectInfo.image_width = bullet_image_table[Bullet_image][2]
+        self.ObjectInfo.image_height = bullet_image_table[Bullet_image][3]
 
-        self.ObjectInfo.width = Bullet_image[2]
-        self.ObjectInfo.height = Bullet_image[3]
+        self.ObjectInfo.width = bullet_image_table[Bullet_image][2]
+        self.ObjectInfo.height = bullet_image_table[Bullet_image][3]
 
-        self.ObjectInfo.image_left = Bullet_image[0]
-        self.ObjectInfo.image_bottom = self.ObjectInfo.image.h - Bullet_image[1]
+        self.ObjectInfo.image_left = bullet_image_table[Bullet_image][0]
+        self.ObjectInfo.image_bottom = self.ObjectInfo.image.h - bullet_image_table[Bullet_image][1]
         self.ObjectInfo.frame_offset = 0
-
-        self.event_que = []
 
 
     def update(self):
