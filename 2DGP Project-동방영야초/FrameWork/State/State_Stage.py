@@ -1,20 +1,23 @@
 from pico2d import *
 from FrameWork import MainFrameWork
+from FrameWork import Player
 
-image_Lobby = None
+name = "State_Stage"
 
-name = "State_Lobby"
+image_Main_BG = None
+image_Background = None
+Background_Scroll_y = 0
 
 def enter():
-    global image_Lobby
+    global image_Main_BG
 
-    if (image_Lobby == None):
-        image_Lobby = load_image("Menu.png")
+    if image_Main_BG == None:
+        image_Main_BG = load_image("MainBackGround.png")
 
 
 def exit():
-    global image_Lobby
-    del(image_Lobby)
+    global image_Main_BG
+    del(image_Main_BG)
 
 
 
@@ -41,14 +44,10 @@ def update():
 
 
 def draw():
-    global image_Lobby
+    global image_Main_BG
     clear_canvas()
 
-    draw_background()
+    image_Main_BG.clip_draw(0,0,121,159,400,300,800,600)
 
     update_canvas()
-
-
-def draw_background():
-    if image_Lobby != None:
-        image_Lobby.clip_draw(14, image_Lobby.h - 529, 640, 480, 400, 300, 800, 600)
+    pass

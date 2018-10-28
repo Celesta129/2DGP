@@ -24,11 +24,10 @@ def run(state_current):
         stack[-1].draw()
 
     # stack의 위부터 반복적으로 지운다.
-    while(len(stack>0)):
+    while(len(stack)>0):
         stack[-1].exit()
         stack.pop()
 
-    pass
 
 
 def change_state(state):

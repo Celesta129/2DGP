@@ -1,0 +1,15 @@
+시스템의 변화를 모델링
+
+상태 State
+상태변화 State Transition
+	외부이벤트 : ex)키보드입력
+	내부이벤트 : ex)타이머
+	경우에 따라 이벤트없이 상태변화가 있을 수 있음.
+Exit action 상태에서 나갈때 하는 행위.
+Entry Action 상태에 들어가면서 하는 행위.
+do Activity 상태에서 하는 행위.
+
+lec10의 boy의 idlestate는 일종의 네임스페이스로 활용중임.
+@staticmethod 키워드를 사용해 클래스 외부에서 클래스객체 없이 사용 가능하게만듬.
+
+clamp : pico2d함수. (x,y,z) y값을 x와 z값 사이의 랜덤으로 결정.
