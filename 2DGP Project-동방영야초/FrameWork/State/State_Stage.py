@@ -1,6 +1,5 @@
 from pico2d import *
 from FrameWork import MainFrameWork
-from FrameWork import Player
 
 name = "State_Stage"
 
@@ -8,9 +7,12 @@ image_Main_BG = None
 image_Background = None
 Background_Scroll_y = 0
 
+player = None
 def enter():
     global image_Main_BG
-
+    global player
+    if(player == None):
+        pass
     if image_Main_BG == None:
         image_Main_BG = load_image("MainBackGround.png")
 
