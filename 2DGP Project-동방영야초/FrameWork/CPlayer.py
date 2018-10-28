@@ -80,6 +80,10 @@ class cPlayer:
         self.ObjectInfo.image = cPlayer.Player_image
         self.ObjectInfo.image_width = 24
         self.ObjectInfo.image_height = 42
+
+        self.ObjectInfo.width = 24
+        self.ObjectInfo.height = 42
+
         self.ObjectInfo.image_left = 28 - (int)(self.ObjectInfo.image_width*0.5)
         self.ObjectInfo.image_bottom = cPlayer.Player_image.h - 32 - int(self.ObjectInfo.image_height*0.5)
         self.ObjectInfo.frame_offset = 32
@@ -120,6 +124,11 @@ class cPlayer:
                 self.ObjectInfo.velocity[1] -= 1
             elif key_event == DOWN_UP:
                 self.ObjectInfo.velocity[1] += 1
+
+            if(self.ObjectInfo.velocity[0] >= 1 ):
+                self.ObjectInfo.flip = True
+            else:
+                self.ObjectInfo.flip = False
             self.add_event(key_event)
         pass
 
