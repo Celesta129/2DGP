@@ -51,6 +51,7 @@ def handle_events():
             MainFrameWork.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             MainFrameWork.quit()
+
         else:
             player.handle_event(event)
     pass

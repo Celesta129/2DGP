@@ -31,6 +31,14 @@ def run(state_current):
 
 
 def change_state(state):
+    global stack
+    if (len(stack) > 0):
+        # execute the current state's exit function
+        stack[-1].exit()
+        # remove the current state
+        stack.pop()
+    stack.append(state)
+    state.enter()
     pass
 
 
