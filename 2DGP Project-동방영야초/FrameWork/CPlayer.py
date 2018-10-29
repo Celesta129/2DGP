@@ -2,6 +2,7 @@ from pico2d import *
 from FrameWork.CObject import cObject
 from FrameWork.CBullet import *
 
+# Player Events
 RIGHT_DOWN, LEFT_DOWN, UP_DOWN, DOWN_DOWN, RIGHT_UP, LEFT_UP, UP_UP, DOWN_UP, X_DOWN, X_UP, NONE  = range(11)
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
@@ -21,12 +22,12 @@ sprite_offset_y = 50
 
 class IdleState:
     @staticmethod
-    def enter(Player):
+    def enter(Player,event):
         Player.ObjectInfo.image_bottom = cPlayer.Player_image.h - 32 - int(Player.ObjectInfo.image_height * 0.5)
         pass
 
     @staticmethod
-    def exit(Player):
+    def exit(Player,event):
         pass
 
     @staticmethod
@@ -42,18 +43,21 @@ class IdleState:
             Player.shot_timer = Player.shot_timer_max
         else:
             Player.shot_timer -= 0.05
+
     @staticmethod
     def draw(Player):
         Player.draw()
 
 class MoveState:
     @staticmethod
-    def enter(Player):
+    def enter(Player,event):
         Player.ObjectInfo.image_bottom = cPlayer.Player_image.h - 82 - int(Player.ObjectInfo.image_height*0.5)
         pass
 
     @staticmethod
-    def exit(Player):
+    def exit(Player,event):
+        if event == X_DOWN:
+            Player.shot()
         pass
 
     @staticmethod
@@ -133,19 +137,20 @@ class cPlayer:
         self.cur_state.do(self,_bullet_list)
         if len(self.event_que) > 0 :
             event = self.event_que.pop()
-            if self.ObjectInfo.velocity[0] != 0:
-                self.change_state(MoveState)
-            else:
-                #self.change_state(next_state_table[self.cur_state][event])
-                self.change_state(IdleState)
+            self.cur_state.exit(self,event)
+            self.cur_state = next_state_table[self.cur_state][event]
+            self.cur_state.enter(self,event)
 
+        if (self.ObjectInfo.velocity[0] > 0):
+            self.ObjectInfo.flip = True
+        else:
+            self.ObjectInfo.flip = False
         pass
 
-    def change_state(self,state):
-        self.cur_state.exit(self)
-        self.cur_state = state
-        self.cur_state.enter(self)
+    def shot(self,_bullet_list):
+        print('Shot')
 
+        pass
     def handle_event(self,event):
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
@@ -168,15 +173,7 @@ class cPlayer:
 
             self.add_event(key_event)
 
-            if(key_event == X_DOWN):
-                self.shot = True
-            elif key_event == X_UP:
-                self.shot = False
 
-            if(self.ObjectInfo.velocity[0] > 0 ):
-                self.ObjectInfo.flip = True
-            else:
-                self.ObjectInfo.flip = False
         pass
 
     def draw(self):
