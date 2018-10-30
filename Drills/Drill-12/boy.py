@@ -1,7 +1,7 @@
 import game_framework
 from pico2d import *
 from ball import Ball
-
+from ghost import cGhost
 import game_world
 
 # Boy Run Speed
@@ -46,7 +46,8 @@ class IdleState:
             boy.velocity -= RUN_SPEED_PPS
         elif event == LEFT_UP:
             boy.velocity += RUN_SPEED_PPS
-        boy.timer = 1000
+        boy.timer = 100
+
 
     @staticmethod
     def exit(boy, event):
@@ -105,14 +106,18 @@ class RunState:
             boy.image.clip_draw(int(boy.frame) * 100, 0, 100, 100, boy.x, boy.y)
 
 
+
 class SleepState:
 
     @staticmethod
     def enter(boy, event):
         boy.frame = 0
-
+        game_world.add_object(cGhost(boy.x,boy.y), 1)
     @staticmethod
     def exit(boy, event):
+        ghost = game_world.objects[1][1]
+        game_world.objects[1].pop(1)
+        del(ghost)
         pass
 
     @staticmethod
@@ -151,7 +156,6 @@ class Boy:
         self.event_que = []
         self.cur_state = IdleState
         self.cur_state.enter(self, None)
-
 
     def fire_ball(self):
         ball = Ball(self.x, self.y, self.dir*3)
