@@ -50,17 +50,15 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             MainFrameWork.quit()
         else:
-            for i in range(Game_World.layer_object):
-                for object in Game_World.objects[i]:
-                    object.handle_event(event)
+            player.handle_event(event)
     pass
 
 
 def update():
-
-    for i in range(Game_World.layer_end):
-        for object in Game_World.objects[i]:
-            object.update()
+    for object in Game_World.all_objects():
+        object.update()
+    for bullet in Game_World.all_bullets():
+        bullet.update()
 
     pass
 
@@ -70,8 +68,9 @@ def draw():
     clear_canvas()
 
     image_Main_BG.clip_draw(0,0,121,159,400,300,800,600)
-    for i in range(Game_World.layer_end):
-        for object in Game_World.objects[i]:
-            object.draw()
+    for object in Game_World.all_objects():
+        object.draw()
+    for bullet in Game_World.all_bullets():
+        bullet.draw()
     update_canvas()
     pass

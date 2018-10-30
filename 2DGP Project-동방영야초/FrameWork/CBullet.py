@@ -1,5 +1,7 @@
 from pico2d import *
 from FrameWork.CObject import cObject
+from FrameWork import Game_World
+
 ZACO1, ZACO2, PLAYER1  = range(3)
 # left, bottom, width, height
 
@@ -48,8 +50,12 @@ class cBullet:
 
         self.ObjectInfo.velocity[1] = 1.0
     def update(self):
+        self.ObjectInfo.x += self.ObjectInfo.velocity[0]
         self.ObjectInfo.y += self.ObjectInfo.velocity[1]
-        pass
+
+        if self.ObjectInfo.y > 650 or self.ObjectInfo.y < -50:
+            Game_World.remove_bullet(self)
+
 
     def draw(self):
         self.ObjectInfo.draw()

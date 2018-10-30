@@ -29,7 +29,7 @@ class IdleState:
 
     @staticmethod
     def exit(Player,event):
-        Player.shot()
+
         pass
 
     @staticmethod
@@ -50,8 +50,7 @@ class MoveState:
 
     @staticmethod
     def exit(Player,event):
-        if event == X_DOWN:
-            Player.shot()
+
         pass
 
     @staticmethod
@@ -71,17 +70,17 @@ next_state_table = {
                 RIGHT_DOWN: MoveState, LEFT_DOWN: MoveState,
                 UP_DOWN: MoveState, DOWN_DOWN: MoveState,
                 X_DOWN: IdleState, X_UP: IdleState,
-                NONE: IdleState
+
                 },
 
     MoveState: {RIGHT_UP : MoveState, LEFT_UP: MoveState,
-                UP_UP : IdleState, DOWN_UP : IdleState,
+                UP_UP : MoveState, DOWN_UP : MoveState,
                 RIGHT_DOWN: MoveState, LEFT_DOWN: MoveState,
                 UP_DOWN: MoveState, DOWN_DOWN: MoveState,
                 X_DOWN: MoveState, X_UP: MoveState,
-                NONE: IdleState
                 }
 }
+
 def Init_Bullet(Bullet):
     Bullet.ObjectInfo.velocity[1] = 2
     Bullet.ObjectInfo.rot = 90
@@ -118,29 +117,38 @@ class cPlayer:
     def add_event(self, event):
         self.event_que.insert(0,event)
 
+    def change_state(self,event):
+        self.cur_state.exit(self, event)
+        self.cur_state = next_state_table[self.cur_state][event]
+        self.cur_state.enter(self, event)
+
     def update(self):
         self.cur_state.do(self)
         if len(self.event_que) > 0 :
             event = self.event_que.pop()
-            self.cur_state.exit(self,event)
-            self.cur_state = next_state_table[self.cur_state][event]
-            self.cur_state.enter(self,event)
+            self.change_state(event)
 
         if (self.ObjectInfo.velocity[0] > 0):
             self.ObjectInfo.flip = True
+        elif self.ObjectInfo.velocity[0] == 0:
+            self.cur_state = IdleState
+            self.ObjectInfo.image_bottom = cPlayer.Player_image.h - 32 - int(self.ObjectInfo.image_height * 0.5)
         else:
             self.ObjectInfo.flip = False
+
+        self.shot()
         pass
 
     def shot(self):
-        print('Shot')
-        if (self.shot_timer <= 0):
+        if self.bshot == True:
+            if (self.shot_timer <= 0):
                 Bullet = cBullet(self.ObjectInfo.x, self.ObjectInfo.y, "P2", PLAYER1)
                 Init_Bullet(Bullet)
-                Game_World.add_object(Bullet,Game_World.layer_pTe)
+                Game_World.add_bullet(Bullet,1)
                 self.shot_timer = self.shot_timer_max
-        else:
-            self.shot_timer -= 0.05
+                print('Shot')
+            else:
+                self.shot_timer -= 0.05
 
 
     def handle_event(self,event):
@@ -162,6 +170,10 @@ class cPlayer:
                 self.ObjectInfo.velocity[1] -= 1
             elif key_event == DOWN_UP:
                 self.ObjectInfo.velocity[1] += 1
+            elif key_event == X_DOWN:
+                self.bshot = True
+            elif key_event == X_UP:
+                self.bshot = False
 
             self.add_event(key_event)
 

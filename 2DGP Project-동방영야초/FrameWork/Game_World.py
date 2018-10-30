@@ -1,11 +1,12 @@
 
 # layer 0: Background Objects
-#list_objects = 1
-#list_Bullet_playerTenemy = 2
-#list_Bullet_enemyTplayer = 3
+# Layer 1 : foreground Objects
 
-layer_object, layer_pTe, layer_eTp, layer_end = range(4)
-objects = [[],[],[],[]]
+layer_background, layer_object,  layer_end = range(3)
+layer_pTe, layer_eTp = range(2)
+objects = [[],[]]
+bullets = [[],[]]
+
 
 def add_object(object, layer):
     objects[layer].append(object)
@@ -16,7 +17,6 @@ def remove_object(o):
         if o in objects[i]:
             objects[i].remove(o)
             del o
-
 
 def clear():
     for o in all_objects():
@@ -29,3 +29,25 @@ def all_objects():
         for o in objects[i]:
             yield o
 
+
+def add_bullet(bullet, layer):
+    bullets[layer].append(bullet)
+
+
+def remove_bullet(o):
+    for i in range(len(bullets)):
+        if o in bullets[i]:
+            bullets[i].remove(o)
+            del o
+
+
+def clear_bullet():
+    for o in all_bullets():
+        del o
+    bullets.clear()
+
+
+def all_bullets():
+    for i in range(len(bullets)):
+        for o in bullets[i]:
+            yield o
