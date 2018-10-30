@@ -49,9 +49,8 @@ def handle_events():
             MainFrameWork.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
             MainFrameWork.quit()
-
         else:
-            for i in range(Game_World.layer_end):
+            for i in range(Game_World.layer_object):
                 for object in Game_World.objects[i]:
                     object.handle_event(event)
     pass
