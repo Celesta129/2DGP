@@ -42,7 +42,6 @@ class cGhost:
         self.velocity_x = Radius * w
         self.velocity_y = 0.0
 
-
         if(None == cGhost.image_boy):
             cGhost.image_boy = load_image('animation_sheet.png')
         pass
