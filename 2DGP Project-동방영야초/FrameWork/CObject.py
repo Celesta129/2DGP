@@ -41,6 +41,7 @@ class cObject:
 
             #left, bottom, width, height, rad, flip, x, y
         pass
-
+    def handle_event(self,event):
+        pass
     def update(self):
         pass

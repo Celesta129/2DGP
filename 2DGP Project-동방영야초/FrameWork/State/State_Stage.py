@@ -1,6 +1,7 @@
 from pico2d import *
 from FrameWork import MainFrameWork
 from FrameWork.CPlayer import cPlayer
+from FrameWork import Game_World
 
 name = "State_Stage"
 
@@ -12,9 +13,6 @@ Stage_Scroll_y = 0
 
 player = None
 
-list_objects = []
-list_pTe = []
-list_eTp = []
 
 def enter():
     global image_Main_BG
@@ -22,6 +20,7 @@ def enter():
     global Stage_image
     if player == None:
         player = cPlayer(400,300)
+        Game_World.add_object(player,Game_World.layer_object)
         pass
     if image_Main_BG == None:
         image_Main_BG = load_image("MainBackGround.png")
@@ -32,7 +31,6 @@ def exit():
     global image_Main_BG
     global player
     del(image_Main_BG)
-    del(player)
 
 
 
@@ -53,49 +51,28 @@ def handle_events():
             MainFrameWork.quit()
 
         else:
-            player.handle_event(event)
+            for i in range(Game_World.layer_end):
+                for object in Game_World.objects[i]:
+                    object.handle_event(event)
     pass
 
 
 def update():
-    global list_pTe
-    global list_eTp
 
-    player.update(list_pTe)
-    for object in list_objects:
-        object.update(list_eTp)
+    for i in range(Game_World.layer_end):
+        for object in Game_World.objects[i]:
+            object.update()
 
-    for bullet in list_pTe:
-        bullet.update()
-    for bullet in list_eTp:
-        bullet.update()
-
-    i = 0
-    for bullet in list_pTe:
-        if list_pTe[i].ObjectInfo.y >= 650 or list_pTe[i].ObjectInfo.y <= -50:
-            _bullet = list_pTe.pop(i)
-            del(_bullet)
-        i += 1
-    i = 0
-    for bullet in list_eTp:
-        if list_eTp[i].ObjectInfo.y >= 650 or list_eTp[i].ObjectInfo.y <= -50:
-            _bullet = list_eTp.pop(i)
-            del (_bullet)
-        i += 1
     pass
 
 
 def draw():
     global image_Main_BG
-    global list_pTe
-    global list_eTp
     clear_canvas()
 
     image_Main_BG.clip_draw(0,0,121,159,400,300,800,600)
-    player.draw()
-    for bullet in list_pTe:
-        bullet.draw()
-    for bullet in list_eTp:
-        bullet.draw()
+    for i in range(Game_World.layer_end):
+        for object in Game_World.objects[i]:
+            object.draw()
     update_canvas()
     pass

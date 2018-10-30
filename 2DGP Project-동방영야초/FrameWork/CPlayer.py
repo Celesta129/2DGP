@@ -1,6 +1,7 @@
 from pico2d import *
 from FrameWork.CObject import cObject
 from FrameWork.CBullet import *
+from FrameWork import Game_World
 
 # Player Events
 RIGHT_DOWN, LEFT_DOWN, UP_DOWN, DOWN_DOWN, RIGHT_UP, LEFT_UP, UP_UP, DOWN_UP, X_DOWN, X_UP, NONE  = range(11)
@@ -28,21 +29,14 @@ class IdleState:
 
     @staticmethod
     def exit(Player,event):
+        Player.shot()
         pass
 
     @staticmethod
-    def do(Player,_bullet_list):
+    def do(Player):
         Player.ObjectInfo.frame = (Player.ObjectInfo.frame +1) % 4
         Player.ObjectInfo.y += Player.ObjectInfo.velocity[1]
 
-        if (Player.shot_timer <= 0):
-            if Player.shot == True:
-                Bullet = cBullet(Player.ObjectInfo.x, Player.ObjectInfo.y, "P2", PLAYER1)
-                Init_Bullet(Bullet)
-                _bullet_list.insert(0, Bullet)
-            Player.shot_timer = Player.shot_timer_max
-        else:
-            Player.shot_timer -= 0.05
 
     @staticmethod
     def draw(Player):
@@ -61,19 +55,10 @@ class MoveState:
         pass
 
     @staticmethod
-    def do(Player,_bullet_list):
+    def do(Player):
         Player.ObjectInfo.frame = (Player.ObjectInfo.frame + 1) % 7
         Player.ObjectInfo.x += Player.ObjectInfo.velocity[0]
         Player.ObjectInfo.y += Player.ObjectInfo.velocity[1]
-
-        if(Player.shot_timer <= 0):
-            if Player.shot == True:
-                Bullet = cBullet(Player.ObjectInfo.x, Player.ObjectInfo.y, "P2", PLAYER1)
-                Init_Bullet(Bullet)
-                _bullet_list.insert(0, Bullet)
-            Player.shot_timer = Player.shot_timer_max
-        else:
-            Player.shot_timer -=0.05
 
     @staticmethod
     def draw(Player):
@@ -126,15 +111,15 @@ class cPlayer:
         self.event_que = []
         self.cur_state = IdleState
 
-        self.shot = False
+        self.bshot = False
         self.shot_timer_max = 0.5
         self.shot_timer = 0.5
 
     def add_event(self, event):
         self.event_que.insert(0,event)
 
-    def update(self, _bullet_list):
-        self.cur_state.do(self,_bullet_list)
+    def update(self):
+        self.cur_state.do(self)
         if len(self.event_que) > 0 :
             event = self.event_que.pop()
             self.cur_state.exit(self,event)
@@ -147,10 +132,17 @@ class cPlayer:
             self.ObjectInfo.flip = False
         pass
 
-    def shot(self,_bullet_list):
+    def shot(self):
         print('Shot')
+        if (self.shot_timer <= 0):
+                Bullet = cBullet(self.ObjectInfo.x, self.ObjectInfo.y, "P2", PLAYER1)
+                Init_Bullet(Bullet)
+                Game_World.add_object(Bullet,Game_World.layer_pTe)
+                self.shot_timer = self.shot_timer_max
+        else:
+            self.shot_timer -= 0.05
 
-        pass
+
     def handle_event(self,event):
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
