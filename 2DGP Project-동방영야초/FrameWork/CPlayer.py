@@ -29,9 +29,13 @@ SPEED_MPS = SPEED_MPM / 60.0
 SPEED_PPS = SPEED_MPS * CObject.PIXEL_PER_METER # Pixel Per second
 
 class IdleState:
+    image_offset_y = 32
+    MAX_FRAME = 4
+    TIME_PER_ACTION = 0.5
+    ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
     @staticmethod
     def enter(Player,event):
-        Player.ObjectInfo.image_bottom = cPlayer.Player_image.h - 32 - int(Player.ObjectInfo.image_height * 0.5)
+        Player.ObjectInfo.image_bottom = cPlayer.Player_image.h -IdleState.image_offset_y
         pass
 
     @staticmethod
@@ -41,7 +45,7 @@ class IdleState:
 
     @staticmethod
     def do(Player):
-        Player.ObjectInfo.frame = (Player.ObjectInfo.frame +1) % 4
+        Player.ObjectInfo.frame = (Player.ObjectInfo.frame + MoveState.MAX_FRAME* MoveState.ACTION_PER_TIME * MainFrameWork.frame_time) % MoveState.MAX_FRAME
         Player.move()
 
 
@@ -50,9 +54,13 @@ class IdleState:
         Player.draw()
 
 class MoveState:
+    image_offset_y = 100
+    MAX_FRAME = 7
+    TIME_PER_ACTION = 0.5
+    ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
     @staticmethod
     def enter(Player,event):
-        Player.ObjectInfo.image_bottom = cPlayer.Player_image.h - 82 - int(Player.ObjectInfo.image_height*0.5)
+        Player.ObjectInfo.image_bottom = cPlayer.Player_image.h - MoveState.image_offset_y
         pass
 
     @staticmethod
@@ -62,7 +70,7 @@ class MoveState:
 
     @staticmethod
     def do(Player):
-        Player.ObjectInfo.frame = (Player.ObjectInfo.frame + 1) % 7
+        Player.ObjectInfo.frame = (Player.ObjectInfo.frame + MoveState.MAX_FRAME* MoveState.ACTION_PER_TIME * MainFrameWork.frame_time) % MoveState.MAX_FRAME
         Player.move()
 
     @staticmethod

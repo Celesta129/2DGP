@@ -1,6 +1,7 @@
 from pico2d import *
 from FrameWork.CObject import cObject
 from FrameWork import Game_World
+from FrameWork import Calculator
 
 ZACO1, ZACO2, PLAYER1  = range(3)
 # left, bottom, width, height
