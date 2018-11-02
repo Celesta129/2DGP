@@ -1,5 +1,7 @@
 from pico2d import *
-from FrameWork.CObject import cObject
+from FrameWork import CObject
+from FrameWork import MainFrameWork
+
 from FrameWork.CBullet import *
 from FrameWork import Game_World
 
@@ -21,6 +23,11 @@ sprite_offset_x = 32
 sprite_offset_y = 50
 
 
+SPEED_KMPH = 60.0          # 60 km/h
+SPEED_MPM = SPEED_KMPH * 1000.0 / 60.0
+SPEED_MPS = SPEED_MPM / 60.0
+SPEED_PPS = SPEED_MPS * CObject.PIXEL_PER_METER # Pixel Per second
+
 class IdleState:
     @staticmethod
     def enter(Player,event):
@@ -35,7 +42,7 @@ class IdleState:
     @staticmethod
     def do(Player):
         Player.ObjectInfo.frame = (Player.ObjectInfo.frame +1) % 4
-        Player.ObjectInfo.y += Player.ObjectInfo.velocity[1]
+        Player.move()
 
 
     @staticmethod
@@ -56,8 +63,7 @@ class MoveState:
     @staticmethod
     def do(Player):
         Player.ObjectInfo.frame = (Player.ObjectInfo.frame + 1) % 7
-        Player.ObjectInfo.x += Player.ObjectInfo.velocity[0]
-        Player.ObjectInfo.y += Player.ObjectInfo.velocity[1]
+        Player.move()
 
     @staticmethod
     def draw(Player):
@@ -155,21 +161,21 @@ class cPlayer:
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
             if key_event == RIGHT_DOWN:
-                self.ObjectInfo.velocity[0] += 1
+                self.ObjectInfo.velocity[0] += SPEED_PPS
             elif key_event == LEFT_DOWN:
-                self.ObjectInfo.velocity[0] -= 1
+                self.ObjectInfo.velocity[0] -= SPEED_PPS
             elif key_event == UP_DOWN:
-                self.ObjectInfo.velocity[1] += 1
+                self.ObjectInfo.velocity[1] += SPEED_PPS
             elif key_event == DOWN_DOWN:
-                self.ObjectInfo.velocity[1] -= 1
+                self.ObjectInfo.velocity[1] -= SPEED_PPS
             elif key_event == RIGHT_UP:
-                self.ObjectInfo.velocity[0] -= 1
+                self.ObjectInfo.velocity[0] -= SPEED_PPS
             elif key_event == LEFT_UP:
-                self.ObjectInfo.velocity[0] += 1
+                self.ObjectInfo.velocity[0] += SPEED_PPS
             elif key_event == UP_UP:
-                self.ObjectInfo.velocity[1] -= 1
+                self.ObjectInfo.velocity[1] -= SPEED_PPS
             elif key_event == DOWN_UP:
-                self.ObjectInfo.velocity[1] += 1
+                self.ObjectInfo.velocity[1] += SPEED_PPS
             elif key_event == X_DOWN:
                 self.bshot = True
             elif key_event == X_UP:
@@ -182,3 +188,7 @@ class cPlayer:
 
     def draw(self):
         self.ObjectInfo.draw()
+
+    def move(self):
+        self.ObjectInfo.x += self.ObjectInfo.velocity[0] * MainFrameWork.frame_time
+        self.ObjectInfo.y += self.ObjectInfo.velocity[1] * MainFrameWork.frame_time

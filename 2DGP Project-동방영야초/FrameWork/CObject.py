@@ -1,6 +1,7 @@
 name = "class_Object"
 
 import math
+PIXEL_PER_METER = 42 / 1.5 # 42Pixel = 1.5Meter
 
 class cObject:
     def __init__(self, x = None, y = None):

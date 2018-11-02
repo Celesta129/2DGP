@@ -12,9 +12,13 @@ class MainFrameWork:
 running = False
 stack = None
 
+import time
+frame_time = 0.0
 
 def run(state_current):
     global running, stack
+    global frame_time
+    current_time = time.time()
     running = True
     stack = [state_current]
     state_current.enter()
@@ -22,6 +26,11 @@ def run(state_current):
         stack[-1].handle_events()
         stack[-1].update()
         stack[-1].draw()
+        #frame time 계산
+        frame_time = time.time() - current_time
+        frame_rate = 1.0/frame_time
+        current_time += frame_time
+
 
     # stack의 위부터 반복적으로 지운다.
     while(len(stack)>0):
