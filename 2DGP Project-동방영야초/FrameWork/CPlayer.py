@@ -1,7 +1,7 @@
 from pico2d import *
+
 from FrameWork import CObject
 from FrameWork import MainFrameWork
-
 from FrameWork.CBullet import *
 from FrameWork import Game_World
 
@@ -19,8 +19,6 @@ key_event_table = {
     (SDL_KEYDOWN, SDLK_x) : X_DOWN,
     (SDL_KEYUP, SDLK_x): X_UP,
 }
-sprite_offset_x = 32
-sprite_offset_y = 50
 
 
 SPEED_KMPH = 60.0          # 60 km/h
@@ -29,13 +27,13 @@ SPEED_MPS = SPEED_MPM / 60.0
 SPEED_PPS = SPEED_MPS * CObject.PIXEL_PER_METER # Pixel Per second
 
 class IdleState:
-    image_offset_y = 32
+    image_bottom = 59
     MAX_FRAME = 4
     TIME_PER_ACTION = 0.5
     ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
     @staticmethod
     def enter(Player,event):
-        Player.ObjectInfo.image_bottom = cPlayer.Player_image.h -IdleState.image_offset_y
+        Player.ObjectInfo.image_bottom = cPlayer.Player_image.h -IdleState.image_bottom
         pass
 
     @staticmethod
@@ -45,7 +43,7 @@ class IdleState:
 
     @staticmethod
     def do(Player):
-        Player.ObjectInfo.frame = (Player.ObjectInfo.frame + MoveState.MAX_FRAME* MoveState.ACTION_PER_TIME * MainFrameWork.frame_time) % MoveState.MAX_FRAME
+        Player.ObjectInfo.frame = (Player.ObjectInfo.frame + MoveState.MAX_FRAME* MoveState.ACTION_PER_TIME * MainFrameWork.frame_time) % IdleState.MAX_FRAME
         Player.move()
 
 
@@ -54,13 +52,13 @@ class IdleState:
         Player.draw()
 
 class MoveState:
-    image_offset_y = 100
+    image_bottom = 59 + 46
     MAX_FRAME = 7
     TIME_PER_ACTION = 0.5
     ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
     @staticmethod
     def enter(Player,event):
-        Player.ObjectInfo.image_bottom = cPlayer.Player_image.h - MoveState.image_offset_y
+        Player.ObjectInfo.image_bottom = cPlayer.Player_image.h - MoveState.image_bottom
         pass
 
     @staticmethod
@@ -111,18 +109,19 @@ class cPlayer:
         self.ObjectInfo.x = x
         self.ObjectInfo.y = y
         self.ObjectInfo.image = cPlayer.Player_image
-        self.ObjectInfo.image_width = 24
-        self.ObjectInfo.image_height = 42
+        self.ObjectInfo.image_width = 32
+        self.ObjectInfo.image_height = 46
 
-        self.ObjectInfo.width = 24
-        self.ObjectInfo.height = 42
+        self.ObjectInfo.width = 32
+        self.ObjectInfo.height = 46
 
-        self.ObjectInfo.image_left = 28 - (int)(self.ObjectInfo.image_width*0.5)
-        self.ObjectInfo.image_bottom = cPlayer.Player_image.h - 32 - int(self.ObjectInfo.image_height*0.5)
-        self.ObjectInfo.frame_offset = sprite_offset_x
+        self.ObjectInfo.image_left = 14
+        self.ObjectInfo.image_bottom = cPlayer.Player_image.h - 13
+        self.ObjectInfo.max_frame = 4
 
         self.event_que = []
         self.cur_state = IdleState
+
 
         self.bshot = False
         self.shot_timer_max = 0.5

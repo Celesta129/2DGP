@@ -1,5 +1,5 @@
 from pico2d import *
-from FrameWork import MainFrameWork
+from FrameWork import MainFrameWork, CEnemy
 from FrameWork.CPlayer import cPlayer
 from FrameWork import Game_World
 
@@ -14,6 +14,7 @@ Stage_Scroll_y = 0
 image_sidebar = None
 
 player = None
+test_enemy = None
 
 STAGE1,STAGE2 = range(2)
 stage_pos_table = {STAGE1:(17,292,258,258),STAGE2:(17,929,255,255)}
@@ -24,10 +25,14 @@ def enter():
     global player
     global Stage_image
     global image_sidebar
+    global test_enemy
     if player == None:
         player = cPlayer(400,300)
         Game_World.add_object(player,Game_World.layer_object)
         pass
+    if test_enemy == None:
+        test_enemy = CEnemy.Zaco1(400,300)
+        Game_World.add_object(test_enemy, Game_World.layer_object)
     if image_Main_BG == None:
         image_Main_BG = load_image("MainBackGround.png")
     if Stage_image == None:
@@ -66,6 +71,7 @@ def update():
         object.update()
     for bullet in Game_World.all_bullets():
         bullet.update()
+
 
     pass
 

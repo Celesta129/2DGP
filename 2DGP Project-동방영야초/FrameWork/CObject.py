@@ -18,7 +18,7 @@ class cObject:
         self.radius = 0.0
 
         self.frame = 0
-        self.frame_offset = 0
+        self.max_frame = 0
 
         self.image = None
         self.image_left = 0
@@ -34,13 +34,13 @@ class cObject:
     def draw(self):
         if self.image != None:
             if self.flip == True:
-                self.image.clip_composite_draw(self.image_left + self.frame_offset * int(self.frame), self.image_bottom,
+                self.image.clip_composite_draw(self.image_left + self.image_width * int(self.frame), self.image_bottom,
                                  self.image_width, self.image_height,
                                  math.radians(self.rot + 180), 'v',
                                  self.x, self.y,
                                  self.width,self.height)
             else:
-                self.image.clip_composite_draw(self.image_left + self.frame_offset * int(self.frame), self.image_bottom,
+                self.image.clip_composite_draw(self.image_left + self.image_width * int(self.frame), self.image_bottom,
                                                self.image_width, self.image_height,
                                                math.radians(self.rot), 'n',
                                                self.x, self.y,
