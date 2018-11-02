@@ -53,7 +53,7 @@ class cBullet:
         self.ObjectInfo.x += self.ObjectInfo.velocity[0]
         self.ObjectInfo.y += self.ObjectInfo.velocity[1]
 
-        if self.ObjectInfo.y > 650 or self.ObjectInfo.y < -50:
+        if self.ObjectInfo.y > 550 or self.ObjectInfo.y < 10:
             Game_World.remove_bullet(self)
 
 

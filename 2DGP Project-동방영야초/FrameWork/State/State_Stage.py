@@ -13,6 +13,9 @@ Stage_Scroll_y = 0
 
 player = None
 
+STAGE1,STAGE2 = range(2)
+stage_pos_table = {STAGE1:(17,292,258,258),STAGE2:(17,929,255,255)}
+cur_stage_number = STAGE1
 
 def enter():
     global image_Main_BG
@@ -67,10 +70,25 @@ def draw():
     global image_Main_BG
     clear_canvas()
 
-    image_Main_BG.clip_draw(0,0,121,159,400,300,800,600)
+    draw_background()
+    draw_scoreboard()
     for object in Game_World.all_objects():
         object.draw()
     for bullet in Game_World.all_bullets():
         bullet.draw()
     update_canvas()
+    pass
+
+def draw_background():
+    image_Main_BG.clip_draw(0, 0, 121, 159, 400, 300, 800, 600)
+
+    left = stage_pos_table[cur_stage_number][0]
+    bottom = Stage_image.h - stage_pos_table[cur_stage_number][1]
+    width = stage_pos_table[cur_stage_number][2]
+    height = stage_pos_table[cur_stage_number][3]
+
+    x,y = 220,290
+    Stage_image.clip_draw(left,bottom,width,height,x,y,400,550)
+
+def draw_scoreboard():
     pass
