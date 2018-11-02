@@ -88,7 +88,7 @@ def draw_background():
     height = stage_pos_table[cur_stage_number][3]
 
     x,y = 220,290
-    Stage_image.clip_draw(left,bottom,width,height,x,y,400,550)
+    Stage_image.clip_draw(left,bottom,width,height,x,y, 400,550)
 
 def draw_scoreboard():
     pass

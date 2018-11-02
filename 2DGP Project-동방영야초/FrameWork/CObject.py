@@ -10,6 +10,7 @@ class cObject:
 
         self.hp = 0
         self.dmg = 0
+        self.radius = 0.0
 
         self.frame = 0
         self.frame_offset = 0
