@@ -31,6 +31,8 @@ class cObject:
 
         self.flip = False
         self.rot = 0
+
+        self.objectType = "Rect"
     def draw(self):
         if self.image != None:
             if self.flip == True:
@@ -38,13 +40,13 @@ class cObject:
                                  self.image_width, self.image_height,
                                  math.radians(self.rot + 180), 'v',
                                  self.x, self.y,
-                                 self.width,self.height)
+                                 self.image_width,self.image_height)
             else:
                 self.image.clip_composite_draw(self.image_left + self.image_width * int(self.frame), self.image_bottom,
                                                self.image_width, self.image_height,
                                                math.radians(self.rot), 'n',
                                                self.x, self.y,
-                                               self.width, self.height)
+                                               self.image_width, self.image_height)
 
             #left, bottom, width, height, rad, flip, x, y
         pass

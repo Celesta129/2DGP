@@ -2,9 +2,9 @@
 # layer 0: Background Objects
 # Layer 1 : foreground Objects
 
-layer_background, layer_object,  layer_end = range(3)
+layer_background, layer_player, layer_enemy = range(3)
 layer_pTe, layer_eTp = range(2)
-objects = [[],[]]
+objects = [[],[],[]]
 bullets = [[],[]]
 
 
@@ -17,6 +17,7 @@ def remove_object(o):
         if o in objects[i]:
             objects[i].remove(o)
             del o
+            break
 
 def clear():
     for o in all_objects():
@@ -39,6 +40,7 @@ def remove_bullet(o):
         if o in bullets[i]:
             bullets[i].remove(o)
             del o
+            break
 
 
 def clear_bullet():

@@ -12,8 +12,10 @@ class Zaco1:
     enemy_image = None
     left = 10
     bottom = 38
-    width = 32
-    height = 32
+
+    width = 20
+    height = 24
+
     image_width = 32
     image_height = 32
     max_frame = 4
@@ -36,7 +38,12 @@ class Zaco1:
 
         self.ObjectInfo.frame = 0
         self.ObjectInfo.max_frame = Zaco1.max_frame
+
+        self.ObjectInfo.objectType = "Rect"
+
+        self.shot_pattern = SP_1
         self.bullet = None
+
         pass
 
     def update(self):
@@ -44,12 +51,36 @@ class Zaco1:
         TIME_PER_ACTION = 0.5
         ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 
+
+        self.shot_pattern.shot(self)
         self.ObjectInfo.frame = (self.ObjectInfo.frame + MAX_FRAME * ACTION_PER_TIME * MainFrameWork.frame_time) % MAX_FRAME
+
         pass
 
     def draw(self):
         self.ObjectInfo.draw()
         pass
+
+    def shot(self):
+        pass
+
+    def pattern_change(self,shot_pattern):
+        self.shot_pattern.exit(self)
+        self.shot_pattern = shot_pattern
+        self.shot_pattern.enter(self)
+    pass
+
+class SP_1:
+    @staticmethod
+    def enter(Enemy):
+        pass
+
+    def exit(Enemy):
+        pass
+
+    @staticmethod
+    def shot(Enemy):
+        Enemy.shot()
     pass
 
 class bullet1:

@@ -112,8 +112,8 @@ class cPlayer:
         self.ObjectInfo.image_width = 32
         self.ObjectInfo.image_height = 46
 
-        self.ObjectInfo.width = 32
-        self.ObjectInfo.height = 46
+        self.ObjectInfo.width = 24
+        self.ObjectInfo.height = 40
 
         self.ObjectInfo.image_left = 14
         self.ObjectInfo.image_bottom = cPlayer.Player_image.h - 13
@@ -122,10 +122,9 @@ class cPlayer:
         self.event_que = []
         self.cur_state = IdleState
 
-
         self.bshot = False
-        self.shot_timer_max = 0.5
-        self.shot_timer = 0.5
+        self.shot_timer_max = 0.08
+        self.shot_timer = 0.08
 
     def add_event(self, event):
         self.event_que.insert(0,event)
@@ -150,18 +149,30 @@ class cPlayer:
             self.ObjectInfo.flip = False
 
         self.shot()
+        if self.ObjectInfo.x - self.ObjectInfo.width*0.5 < 15:
+            self.ObjectInfo.x = 15 + self.ObjectInfo.width*0.5
+        elif self.ObjectInfo.x + self.ObjectInfo.width*0.5 > 480:
+            self.ObjectInfo.x = 480 - self.ObjectInfo.width * 0.5
+
+        if self.ObjectInfo.y - self.ObjectInfo.height * 0.5 < 20 :
+            self.ObjectInfo.y = 20 + self.ObjectInfo.height * 0.5
+        elif self.ObjectInfo.y + self.ObjectInfo.height * 0.5 > 565:
+            self.ObjectInfo.y = 565 - self.ObjectInfo.height * 0.5
+        # stage
+        # 15 < x < 480
+        # 20 <y< 565
         pass
 
     def shot(self):
         if self.bshot == True:
             if (self.shot_timer <= 0):
-                Bullet = cBullet(self.ObjectInfo.x, self.ObjectInfo.y, "P2", PLAYER1)
+                Bullet = cBullet(self.ObjectInfo.x, self.ObjectInfo.y + 5, "P2", PLAYER1)
                 Init_Bullet(Bullet)
-                Game_World.add_bullet(Bullet,1)
+                Game_World.add_bullet(Bullet,Game_World.layer_pTe)
                 self.shot_timer = self.shot_timer_max
                 print('Shot')
             else:
-                self.shot_timer -= 0.05
+                self.shot_timer -= MainFrameWork.frame_time
 
 
     def handle_event(self,event):

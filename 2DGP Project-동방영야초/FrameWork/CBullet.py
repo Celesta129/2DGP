@@ -1,14 +1,14 @@
 from pico2d import *
 from FrameWork.CObject import cObject
 from FrameWork import Game_World
-from FrameWork import Calculator
+from FrameWork.Calculator import *
 
 ZACO1, ZACO2, PLAYER1  = range(3)
-# left, bottom, width, height
+# left, bottom, image_width, image_height, width, height
 
-bullet_image_table = { ZACO1 : (33, 174, 25, 25),
-                        ZACO2  :(33, 174, 25, 25),
-                       PLAYER1 : (35,167,40,12)
+bullet_image_table = { ZACO1 : (33, 174, 25, 25, 12,14),
+                        ZACO2  :(33, 174, 25, 25, 12,14),
+                       PLAYER1 : (35,167,40,12, 38,12)
                      }
 
 
@@ -42,20 +42,22 @@ class cBullet:
         self.ObjectInfo.image_width = bullet_image_table[Bullet_image][2]
         self.ObjectInfo.image_height = bullet_image_table[Bullet_image][3]
 
-        self.ObjectInfo.width = bullet_image_table[Bullet_image][2]
-        self.ObjectInfo.height = bullet_image_table[Bullet_image][3]
+        self.ObjectInfo.width = bullet_image_table[Bullet_image][4]
+        self.ObjectInfo.height = bullet_image_table[Bullet_image][5]
 
         self.ObjectInfo.image_left = bullet_image_table[Bullet_image][0]
         self.ObjectInfo.image_bottom = self.ObjectInfo.image.h - bullet_image_table[Bullet_image][1]
-        self.ObjectInfo.frame_offset = 0
+
 
         self.ObjectInfo.velocity[1] = 1.0
+
+        self.ObjectInfo.objectType = "Rect"
     def update(self):
         self.ObjectInfo.x += self.ObjectInfo.velocity[0]
         self.ObjectInfo.y += self.ObjectInfo.velocity[1]
 
-        if self.ObjectInfo.y > 550 or self.ObjectInfo.y < 10:
-            Game_World.remove_bullet(self)
+
+
 
 
     def draw(self):
