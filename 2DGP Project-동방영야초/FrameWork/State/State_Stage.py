@@ -27,11 +27,11 @@ def enter():
     global image_sidebar
     global test_enemy
     if player == None:
-        player = cPlayer(400,300)
+        player = cPlayer(240,300)
         Game_World.add_object(player,Game_World.layer_player)
         pass
     if test_enemy == None:
-        test_enemy = CEnemy.Zaco1(400,300)
+        test_enemy = CEnemy.Zaco1(240,500)
         Game_World.add_object(test_enemy, Game_World.layer_enemy)
     if image_Main_BG == None:
         image_Main_BG = load_image("MainBackGround.png")
@@ -81,13 +81,22 @@ def bullet_collision():
     for bullet in Game_World.bullets[Game_World.layer_pTe]:
         for enemy in Game_World.objects[Game_World.layer_enemy]:
             if True == collision(bullet, enemy):
+                print("pTe Bullet Collision")
                 Game_World.remove_bullet(bullet)
+                enemy.hp -= bullet.dmg
 
     # enemyBullet to Player
     for bullet in Game_World.bullets[Game_World.layer_eTp]:
         for player in Game_World.objects[Game_World.layer_player]:
             if True == collision(bullet, player):
+                print("eTp Bullet Collision")
                 Game_World.remove_bullet(bullet)
+
+    # 몹의 체력이 0이라면 삭제
+    for enemy in Game_World.objects[Game_World.layer_enemy]:
+        if enemy.hp <= 0:
+            Game_World.remove_object(enemy)
+            print("delete Enemy")
 
     # 화면 나가면 삭제
     for bullet in Game_World.all_bullets():

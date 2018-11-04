@@ -12,9 +12,6 @@ class cObject:
             self.y = y
 
         self.velocity = [0,0]
-
-        self.hp = 0
-        self.dmg = 0
         self.radius = 0.0
 
         self.frame = 0

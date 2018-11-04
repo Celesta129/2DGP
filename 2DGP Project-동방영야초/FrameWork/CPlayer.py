@@ -6,7 +6,7 @@ from FrameWork.CBullet import *
 from FrameWork import Game_World
 
 # Player Events
-RIGHT_DOWN, LEFT_DOWN, UP_DOWN, DOWN_DOWN, RIGHT_UP, LEFT_UP, UP_UP, DOWN_UP, X_DOWN, X_UP, NONE  = range(11)
+RIGHT_DOWN, LEFT_DOWN, UP_DOWN, DOWN_DOWN, RIGHT_UP, LEFT_UP, UP_UP, DOWN_UP, Z_DOWN, Z_UP, X_DOWN, X_UP, SHIFT_DOWN, SHIFT_UP  = range(14)
 key_event_table = {
     (SDL_KEYDOWN, SDLK_RIGHT): RIGHT_DOWN,
     (SDL_KEYDOWN, SDLK_LEFT): LEFT_DOWN,
@@ -16,8 +16,12 @@ key_event_table = {
     (SDL_KEYUP, SDLK_LEFT): LEFT_UP,
     (SDL_KEYUP, SDLK_UP): UP_UP,
     (SDL_KEYUP, SDLK_DOWN): DOWN_UP,
+    (SDL_KEYDOWN, SDLK_z) : Z_DOWN,
+    (SDL_KEYUP, SDLK_z): Z_UP,
     (SDL_KEYDOWN, SDLK_x) : X_DOWN,
     (SDL_KEYUP, SDLK_x): X_UP,
+    (SDL_KEYDOWN, SDLK_LSHIFT) : SHIFT_DOWN,
+    (SDL_KEYUP, SDLK_LSHIFT): SHIFT_UP,
 }
 
 
@@ -81,23 +85,33 @@ next_state_table = {
                 UP_UP : MoveState, DOWN_UP : MoveState,
                 RIGHT_DOWN: MoveState, LEFT_DOWN: MoveState,
                 UP_DOWN: MoveState, DOWN_DOWN: MoveState,
+                Z_DOWN: IdleState, Z_UP: IdleState,
                 X_DOWN: IdleState, X_UP: IdleState,
-
+                SHIFT_DOWN: IdleState, SHIFT_UP: IdleState
                 },
 
     MoveState: {RIGHT_UP : MoveState, LEFT_UP: MoveState,
                 UP_UP : MoveState, DOWN_UP : MoveState,
                 RIGHT_DOWN: MoveState, LEFT_DOWN: MoveState,
                 UP_DOWN: MoveState, DOWN_DOWN: MoveState,
+                Z_DOWN: MoveState, Z_UP: MoveState,
                 X_DOWN: MoveState, X_UP: MoveState,
+                SHIFT_DOWN: MoveState, SHIFT_UP: MoveState
                 }
+
 }
 
 def Init_Bullet(Bullet):
-    Bullet.ObjectInfo.velocity[1] = 2
+    Bullet.ObjectInfo.image = cBullet.PlayerBullet_image2
+
     Bullet.ObjectInfo.rot = 90
     Bullet.dmg = 1
 
+    bSPEED_KMPH = 100.0  # 60 km/h
+    bSPEED_MPM = bSPEED_KMPH * 1000.0 / 60.0
+    bSPEED_MPS = bSPEED_MPM / 60.0
+    bSPEED_PPS = bSPEED_MPS * CObject.PIXEL_PER_METER  # Pixel Per second
+    Bullet.ObjectInfo.velocity[1] = bSPEED_PPS
 
 name = "class_Player"
 class cPlayer:
@@ -123,8 +137,10 @@ class cPlayer:
         self.cur_state = IdleState
 
         self.bshot = False
-        self.shot_timer_max = 0.08
-        self.shot_timer = 0.08
+        self.bslow = False
+
+        self.shot_timer_max = 0.05
+        self.shot_timer = 0.00
 
     def add_event(self, event):
         self.event_que.insert(0,event)
@@ -154,8 +170,8 @@ class cPlayer:
         elif self.ObjectInfo.x + self.ObjectInfo.width*0.5 > 480:
             self.ObjectInfo.x = 480 - self.ObjectInfo.width * 0.5
 
-        if self.ObjectInfo.y - self.ObjectInfo.height * 0.5 < 20 :
-            self.ObjectInfo.y = 20 + self.ObjectInfo.height * 0.5
+        if self.ObjectInfo.y - self.ObjectInfo.height * 0.5 < 15 :
+            self.ObjectInfo.y = 15 + self.ObjectInfo.height * 0.5
         elif self.ObjectInfo.y + self.ObjectInfo.height * 0.5 > 565:
             self.ObjectInfo.y = 565 - self.ObjectInfo.height * 0.5
         # stage
@@ -173,6 +189,8 @@ class cPlayer:
                 print('Shot')
             else:
                 self.shot_timer -= MainFrameWork.frame_time
+        else:
+            self.shot_timer -= MainFrameWork.frame_time
 
 
     def handle_event(self,event):
@@ -194,11 +212,14 @@ class cPlayer:
                 self.ObjectInfo.velocity[1] -= SPEED_PPS
             elif key_event == DOWN_UP:
                 self.ObjectInfo.velocity[1] += SPEED_PPS
-            elif key_event == X_DOWN:
+            elif key_event == Z_DOWN:
                 self.bshot = True
-            elif key_event == X_UP:
+            elif key_event == Z_UP:
                 self.bshot = False
-
+            elif key_event == SHIFT_DOWN:
+                self.bslow = True
+            elif key_event == SHIFT_UP:
+                self.bslow = False
             self.add_event(key_event)
 
 
@@ -208,5 +229,12 @@ class cPlayer:
         self.ObjectInfo.draw()
 
     def move(self):
-        self.ObjectInfo.x += self.ObjectInfo.velocity[0] * MainFrameWork.frame_time
-        self.ObjectInfo.y += self.ObjectInfo.velocity[1] * MainFrameWork.frame_time
+        ratio = 1
+        if self.bslow == True:
+            ratio = 0.5
+        else:
+            ratio = 1
+
+        self.ObjectInfo.x += self.ObjectInfo.velocity[0] * MainFrameWork.frame_time * ratio
+        self.ObjectInfo.y += self.ObjectInfo.velocity[1] * MainFrameWork.frame_time * ratio
+

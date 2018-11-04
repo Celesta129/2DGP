@@ -1,7 +1,11 @@
 from pico2d import *
 from FrameWork.CObject import cObject
+from FrameWork import MainFrameWork
 from FrameWork import Game_World
 from FrameWork.Calculator import *
+
+BLACK, RED1, RED2, PURPLE1, PURPLE2, BLUE1, BLUE2, CYAN1, CYAN2, GREEN1, GREEN2, GREEN3, YELLOW1,YELLOW2, YELLOW3,WHITE = range(16)
+bullet_color_table = [BLACK, RED1, RED2, PURPLE1, PURPLE2, BLUE1, BLUE2, CYAN1, CYAN2, GREEN1, GREEN2, GREEN3, YELLOW1, YELLOW2, YELLOW3, WHITE]
 
 ZACO1, ZACO2, PLAYER1  = range(3)
 # left, bottom, image_width, image_height, width, height
@@ -52,9 +56,10 @@ class cBullet:
         self.ObjectInfo.velocity[1] = 1.0
 
         self.ObjectInfo.objectType = "Rect"
+        self.dmg = 1
     def update(self):
-        self.ObjectInfo.x += self.ObjectInfo.velocity[0]
-        self.ObjectInfo.y += self.ObjectInfo.velocity[1]
+        self.ObjectInfo.x += self.ObjectInfo.velocity[0] * MainFrameWork.frame_time
+        self.ObjectInfo.y += self.ObjectInfo.velocity[1] * MainFrameWork.frame_time
 
 
 

@@ -57,7 +57,7 @@ def handle_events():
         elif event.type == SDL_KEYDOWN and event.key == SDLK_DOWN:
             button_select = (button_select + 1) % BUTTON_END
         elif event.type == SDL_KEYDOWN:
-            if event.key == SDLK_x or event.key == SDLK_RETURN:
+            if event.key == SDLK_z or event.key == SDLK_RETURN:
                 if button_select == 0:
                     MainFrameWork.change_state(State_Stage)
                 elif button_select == 1:

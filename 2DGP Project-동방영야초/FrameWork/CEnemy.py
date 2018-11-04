@@ -1,7 +1,7 @@
 from pico2d import *
 from FrameWork import MainFrameWork
 from FrameWork import CObject
-
+from FrameWork import Game_World
 name = "class_CEnemy"
 #FRAMES_PER_ACTION
 #ACTION_PER_TIME
@@ -44,6 +44,10 @@ class Zaco1:
         self.shot_pattern = SP_1
         self.bullet = None
 
+        self.hp = 10
+
+        self.shot_timer_max = 0.5
+        self.shot_timer = 0.5
         pass
 
     def update(self):
@@ -51,6 +55,10 @@ class Zaco1:
         TIME_PER_ACTION = 0.5
         ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 
+
+        self.shot_timer -= MainFrameWork.frame_time
+        if(self.shot_timer <= 0.0):
+            self.shot_timer = self.shot_timer_max
 
         self.shot_pattern.shot(self)
         self.ObjectInfo.frame = (self.ObjectInfo.frame + MAX_FRAME * ACTION_PER_TIME * MainFrameWork.frame_time) % MAX_FRAME
@@ -61,7 +69,8 @@ class Zaco1:
         self.ObjectInfo.draw()
         pass
 
-    def shot(self):
+    def shot(self,bullet):
+        Game_World.add_bullet(bullet,Game_World.layer_eTp)
         pass
 
     def pattern_change(self,shot_pattern):
@@ -80,7 +89,9 @@ class SP_1:
 
     @staticmethod
     def shot(Enemy):
-        Enemy.shot()
+        newBullet = Enemy.bullet
+        # 여기서 필요한 조정
+        #Enemy.shot(newBullet)   # 만든 탄환을 레이어에 집어넣기만 하는 함수임.
     pass
 
 class bullet1:
