@@ -47,8 +47,8 @@ class Zaco1(cObject):
 
         self.hp = 10
 
-        self.shot_timer_max = 0.5
-        self.shot_timer = 0.5
+        self.shot_timer_max = 1.0
+        self.shot_timer = 1.0
         pass
 
     def update(self):
@@ -60,8 +60,8 @@ class Zaco1(cObject):
         self.shot_timer -= MainFrameWork.frame_time
         if(self.shot_timer <= 0.0):
             self.shot_timer = self.shot_timer_max
+            self.shot_pattern.shot(self)
 
-        self.shot_pattern.shot(self)
         self.frame = (self.frame + MAX_FRAME * ACTION_PER_TIME * MainFrameWork.frame_time) % MAX_FRAME
 
         pass

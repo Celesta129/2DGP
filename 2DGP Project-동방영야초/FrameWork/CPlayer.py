@@ -60,15 +60,18 @@ class MoveState:
     @staticmethod
     def enter(Player,event = None):
         Player.image_bottom = cPlayer.Player_image.h - MoveState.image_bottom
+        Player.frame = 0
         pass
 
     @staticmethod
     def exit(Player,event = None):
+        Player.frame = 0
         pass
 
     @staticmethod
     def do(Player):
-        Player.frame = (Player.frame + MoveState.MAX_FRAME* MoveState.ACTION_PER_TIME * MainFrameWork.frame_time) % MoveState.MAX_FRAME
+        if(Player.frame < MoveState.MAX_FRAME - 1):
+            Player.frame = (Player.frame + MoveState.MAX_FRAME* MoveState.ACTION_PER_TIME * MainFrameWork.frame_time)
 
     @staticmethod
     def draw(Player):
