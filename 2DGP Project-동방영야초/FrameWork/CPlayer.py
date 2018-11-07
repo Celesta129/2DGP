@@ -36,20 +36,17 @@ class IdleState:
     TIME_PER_ACTION = 0.5
     ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
     @staticmethod
-    def enter(Player,event):
-        Player.ObjectInfo.image_bottom = cPlayer.Player_image.h -IdleState.image_bottom
+    def enter(Player,event = None):
+        Player.image_bottom = cPlayer.Player_image.h -IdleState.image_bottom
         pass
 
     @staticmethod
-    def exit(Player,event):
-
+    def exit(Player,event = None):
         pass
 
     @staticmethod
     def do(Player):
-        Player.ObjectInfo.frame = (Player.ObjectInfo.frame + MoveState.MAX_FRAME* MoveState.ACTION_PER_TIME * MainFrameWork.frame_time) % IdleState.MAX_FRAME
-        Player.move()
-
+        Player.frame = (Player.frame + MoveState.MAX_FRAME* MoveState.ACTION_PER_TIME * MainFrameWork.frame_time) % IdleState.MAX_FRAME
 
     @staticmethod
     def draw(Player):
@@ -61,19 +58,17 @@ class MoveState:
     TIME_PER_ACTION = 0.5
     ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
     @staticmethod
-    def enter(Player,event):
-        Player.ObjectInfo.image_bottom = cPlayer.Player_image.h - MoveState.image_bottom
+    def enter(Player,event = None):
+        Player.image_bottom = cPlayer.Player_image.h - MoveState.image_bottom
         pass
 
     @staticmethod
-    def exit(Player,event):
-
+    def exit(Player,event = None):
         pass
 
     @staticmethod
     def do(Player):
-        Player.ObjectInfo.frame = (Player.ObjectInfo.frame + MoveState.MAX_FRAME* MoveState.ACTION_PER_TIME * MainFrameWork.frame_time) % MoveState.MAX_FRAME
-        Player.move()
+        Player.frame = (Player.frame + MoveState.MAX_FRAME* MoveState.ACTION_PER_TIME * MainFrameWork.frame_time) % MoveState.MAX_FRAME
 
     @staticmethod
     def draw(Player):
@@ -101,37 +96,26 @@ next_state_table = {
 
 }
 
-def Init_Bullet(Bullet):
-    Bullet.ObjectInfo.image = cBullet.PlayerBullet_image2
 
-    Bullet.ObjectInfo.rot = 90
-    Bullet.dmg = 1
-
-    bSPEED_KMPH = 100.0  # 60 km/h
-    bSPEED_MPM = bSPEED_KMPH * 1000.0 / 60.0
-    bSPEED_MPS = bSPEED_MPM / 60.0
-    bSPEED_PPS = bSPEED_MPS * CObject.PIXEL_PER_METER  # Pixel Per second
-    Bullet.ObjectInfo.velocity[1] = bSPEED_PPS
 
 name = "class_Player"
-class cPlayer:
+class cPlayer(cObject):
     Player_image = None
     def __init__(self,x,y):
-        self.ObjectInfo = cObject()
         if cPlayer.Player_image == None:
             cPlayer.Player_image = load_image("Players.png")
-        self.ObjectInfo.x = x
-        self.ObjectInfo.y = y
-        self.ObjectInfo.image = cPlayer.Player_image
-        self.ObjectInfo.image_width = 32
-        self.ObjectInfo.image_height = 46
+        super().__init__(x,y)
 
-        self.ObjectInfo.width = 24
-        self.ObjectInfo.height = 40
+        self.image = cPlayer.Player_image
+        self.image_width = 32
+        self.image_height = 46
 
-        self.ObjectInfo.image_left = 14
-        self.ObjectInfo.image_bottom = cPlayer.Player_image.h - 13
-        self.ObjectInfo.max_frame = 4
+        self.width = 24
+        self.height = 40
+
+        self.image_left = 14
+        self.image_bottom = cPlayer.Player_image.h - 13
+        self.max_frame = 4
 
         self.event_que = []
         self.cur_state = IdleState
@@ -142,6 +126,7 @@ class cPlayer:
         self.shot_timer_max = 0.05
         self.shot_timer = 0.00
 
+        self.objectType = "Circle"
     def add_event(self, event):
         self.event_que.insert(0,event)
 
@@ -156,24 +141,27 @@ class cPlayer:
             event = self.event_que.pop()
             self.change_state(event)
 
-        if (self.ObjectInfo.velocity[0] > 0):
-            self.ObjectInfo.flip = True
-        elif self.ObjectInfo.velocity[0] == 0:
+        if (self.velocity[0] > 0):
+            self.flip = True
+        elif self.velocity[0] == 0:
+            self.cur_state.exit(self)
             self.cur_state = IdleState
-            self.ObjectInfo.image_bottom = cPlayer.Player_image.h - 32 - int(self.ObjectInfo.image_height * 0.5)
+            self.cur_state.enter(self)
         else:
-            self.ObjectInfo.flip = False
+            self.flip = False
 
+        self.move()
         self.shot()
-        if self.ObjectInfo.x - self.ObjectInfo.width*0.5 < 15:
-            self.ObjectInfo.x = 15 + self.ObjectInfo.width*0.5
-        elif self.ObjectInfo.x + self.ObjectInfo.width*0.5 > 480:
-            self.ObjectInfo.x = 480 - self.ObjectInfo.width * 0.5
 
-        if self.ObjectInfo.y - self.ObjectInfo.height * 0.5 < 15 :
-            self.ObjectInfo.y = 15 + self.ObjectInfo.height * 0.5
-        elif self.ObjectInfo.y + self.ObjectInfo.height * 0.5 > 565:
-            self.ObjectInfo.y = 565 - self.ObjectInfo.height * 0.5
+        if self.x - self.width*0.5 < 15:
+            self.x = 15 + self.width*0.5
+        elif self.x + self.width*0.5 > 480:
+            self.x = 480 - self.width * 0.5
+
+        if self.y - self.height * 0.5 < 15 :
+            self.y = 15 + self.height * 0.5
+        elif self.y + self.height * 0.5 > 565:
+            self.y = 565 - self.height * 0.5
         # stage
         # 15 < x < 480
         # 20 <y< 565
@@ -182,7 +170,7 @@ class cPlayer:
     def shot(self):
         if self.bshot == True:
             if (self.shot_timer <= 0):
-                Bullet = cBullet(self.ObjectInfo.x, self.ObjectInfo.y + 5, "P2", PLAYER1)
+                Bullet = pBullet_1(self.x, self.y + 5)
                 Init_Bullet(Bullet)
                 Game_World.add_bullet(Bullet,Game_World.layer_pTe)
                 self.shot_timer = self.shot_timer_max
@@ -197,21 +185,21 @@ class cPlayer:
         if (event.type, event.key) in key_event_table:
             key_event = key_event_table[(event.type, event.key)]
             if key_event == RIGHT_DOWN:
-                self.ObjectInfo.velocity[0] += SPEED_PPS
+                self.velocity[0] += SPEED_PPS
             elif key_event == LEFT_DOWN:
-                self.ObjectInfo.velocity[0] -= SPEED_PPS
+                self.velocity[0] -= SPEED_PPS
             elif key_event == UP_DOWN:
-                self.ObjectInfo.velocity[1] += SPEED_PPS
+                self.velocity[1] += SPEED_PPS
             elif key_event == DOWN_DOWN:
-                self.ObjectInfo.velocity[1] -= SPEED_PPS
+                self.velocity[1] -= SPEED_PPS
             elif key_event == RIGHT_UP:
-                self.ObjectInfo.velocity[0] -= SPEED_PPS
+                self.velocity[0] -= SPEED_PPS
             elif key_event == LEFT_UP:
-                self.ObjectInfo.velocity[0] += SPEED_PPS
+                self.velocity[0] += SPEED_PPS
             elif key_event == UP_UP:
-                self.ObjectInfo.velocity[1] -= SPEED_PPS
+                self.velocity[1] -= SPEED_PPS
             elif key_event == DOWN_UP:
-                self.ObjectInfo.velocity[1] += SPEED_PPS
+                self.velocity[1] += SPEED_PPS
             elif key_event == Z_DOWN:
                 self.bshot = True
             elif key_event == Z_UP:
@@ -225,9 +213,6 @@ class cPlayer:
 
         pass
 
-    def draw(self):
-        self.ObjectInfo.draw()
-
     def move(self):
         ratio = 1
         if self.bslow == True:
@@ -235,6 +220,23 @@ class cPlayer:
         else:
             ratio = 1
 
-        self.ObjectInfo.x += self.ObjectInfo.velocity[0] * MainFrameWork.frame_time * ratio
-        self.ObjectInfo.y += self.ObjectInfo.velocity[1] * MainFrameWork.frame_time * ratio
+        self.x += self.velocity[0] * MainFrameWork.frame_time * ratio
+        self.y += self.velocity[1] * MainFrameWork.frame_time * ratio
 
+def Init_Bullet(Bullet):
+
+    Bullet.rot = 90
+    Bullet.dmg = 1
+
+    bSPEED_KMPH = 100.0  # 60 km/h
+    bSPEED_MPM = bSPEED_KMPH * 1000.0 / 60.0
+    bSPEED_MPS = bSPEED_MPM / 60.0
+    bSPEED_PPS = bSPEED_MPS * CObject.PIXEL_PER_METER  # Pixel Per second
+
+    radian_rot = math.radians(Bullet.rot)
+
+    cos = math.cos(radian_rot)
+    sin = math.sin(radian_rot)
+
+    Bullet.velocity[0] = cos * bSPEED_PPS
+    Bullet.velocity[1] = sin * bSPEED_PPS

@@ -1,14 +1,17 @@
 from pico2d import *
 from FrameWork import MainFrameWork
-from FrameWork import CObject
+from FrameWork.CObject import *
 from FrameWork import Game_World
+from FrameWork import Calculator
+from FrameWork.CBullet import *
 name = "class_CEnemy"
 #FRAMES_PER_ACTION
 #ACTION_PER_TIME
 #game_framework.frame_time) % 8
 
 
-class Zaco1:
+class Zaco1(cObject):
+
     enemy_image = None
     left = 10
     bottom = 38
@@ -22,27 +25,25 @@ class Zaco1:
 
 
     def __init__(self,x = None,y = None):
+        super().__init__(x,y)
         if Zaco1.enemy_image == None:
             Zaco1.enemy_image = load_image("Enemies & Special Projectiles.png")
 
-        self.ObjectInfo = CObject.cObject()
 
-        self.ObjectInfo.image = Zaco1.enemy_image
-        self.ObjectInfo.x,self.ObjectInfo.y = 0,0
-        if (None != x): self.ObjectInfo.x = x
-        if (None != y): self.ObjectInfo.y = y
+        self.image = Zaco1.enemy_image
 
-        self.ObjectInfo.image_left, self.ObjectInfo.image_bottom = Zaco1.left, Zaco1.enemy_image.h - Zaco1.bottom
-        self.ObjectInfo.width,self.ObjectInfo.height = Zaco1.width, Zaco1.height
-        self.ObjectInfo.image_width, self.ObjectInfo.image_height = Zaco1.image_width, Zaco1.image_height
 
-        self.ObjectInfo.frame = 0
-        self.ObjectInfo.max_frame = Zaco1.max_frame
+        self.image_left, self.image_bottom = Zaco1.left, Zaco1.enemy_image.h - Zaco1.bottom
+        self.width,self.height = Zaco1.width, Zaco1.height
+        self.image_width, self.image_height = Zaco1.image_width, Zaco1.image_height
 
-        self.ObjectInfo.objectType = "Rect"
+        self.frame = 0
+        self.max_frame = Zaco1.max_frame
+
+        self.objectType = "Rect"
 
         self.shot_pattern = SP_1
-        self.bullet = None
+        self.bullet = eBullet_1
 
         self.hp = 10
 
@@ -51,7 +52,7 @@ class Zaco1:
         pass
 
     def update(self):
-        MAX_FRAME =  self.ObjectInfo.max_frame
+        MAX_FRAME =  self.max_frame
         TIME_PER_ACTION = 0.5
         ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 
@@ -61,13 +62,10 @@ class Zaco1:
             self.shot_timer = self.shot_timer_max
 
         self.shot_pattern.shot(self)
-        self.ObjectInfo.frame = (self.ObjectInfo.frame + MAX_FRAME * ACTION_PER_TIME * MainFrameWork.frame_time) % MAX_FRAME
+        self.frame = (self.frame + MAX_FRAME * ACTION_PER_TIME * MainFrameWork.frame_time) % MAX_FRAME
 
         pass
 
-    def draw(self):
-        self.ObjectInfo.draw()
-        pass
 
     def shot(self,bullet):
         Game_World.add_bullet(bullet,Game_World.layer_eTp)
@@ -82,6 +80,7 @@ class Zaco1:
 class SP_1:
     @staticmethod
     def enter(Enemy):
+
         pass
 
     def exit(Enemy):
@@ -89,13 +88,15 @@ class SP_1:
 
     @staticmethod
     def shot(Enemy):
-        newBullet = Enemy.bullet
+        if(Enemy.bullet == None):
+            pass
+
+        target = Game_World.objects[Game_World.layer_player][0]
+        newBullet = Enemy.bullet(Enemy.x,Enemy.y)
+
+        # 일단 플레이어쪽으로 쏴보자
+        rot = math.degrees(Calculator.get_angle_down(Enemy,target))
         # 여기서 필요한 조정
-        #Enemy.shot(newBullet)   # 만든 탄환을 레이어에 집어넣기만 하는 함수임.
-    pass
-
-class bullet1:
-    def draw(self):
-        pass
-
+        InitBullet(newBullet, rot, 50, 50)
+        Enemy.shot(newBullet)   # 만든 탄환을 레이어에 집어넣기만 하는 함수임.
     pass

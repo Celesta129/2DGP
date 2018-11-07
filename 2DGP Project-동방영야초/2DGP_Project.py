@@ -10,7 +10,7 @@ State_Current = State_Logo
 
 def Run():
     pico2d.open_canvas( )
-    MainFrameWork.run(State_Lobby)
+    MainFrameWork.run(State_Stage)
     pico2d.close_canvas()
 
 if __name__ == '__main__':

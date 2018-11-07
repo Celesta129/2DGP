@@ -27,7 +27,7 @@ def enter():
     global image_sidebar
     global test_enemy
     if player == None:
-        player = cPlayer(240,300)
+        player = cPlayer(240,100)
         Game_World.add_object(player,Game_World.layer_player)
         pass
     if test_enemy == None:
@@ -112,12 +112,12 @@ def test_Background_coll(object):
     stage_top = stage_bottom + stage_height
     stage_right = stage_left + stage_width
 
-    if object.ObjectInfo.y + object.ObjectInfo.height * 0.5 < stage_bottom \
-            or object.ObjectInfo.y - object.ObjectInfo.height * 0.5 > stage_top:
+    if object.y + object.height * 0.5 < stage_bottom \
+            or object.y - object.height * 0.5 > stage_top:
        return True
 
-    elif object.ObjectInfo.x + object.ObjectInfo.width * 0.5 < stage_left \
-            or object.ObjectInfo.x - object.ObjectInfo.width * 0.5 > stage_right:
+    elif object.x + object.width * 0.5 < stage_left \
+            or object.x - object.width * 0.5 > stage_right:
         return True
 
     return False
@@ -134,7 +134,10 @@ def draw():
     draw_cover()
     update_canvas()
     pass
+
 scroll = 0
+scroll_speed = 0
+
 def draw_background():
     global scroll
     image_Main_BG.clip_draw(0, 0, 121, 159, 400, 300, 800, 600)

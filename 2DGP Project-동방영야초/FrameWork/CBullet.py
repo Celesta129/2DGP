@@ -18,52 +18,47 @@ bullet_image_table = { ZACO1 : (33, 174, 25, 25, 12,14),
 
 name = "class_Bullet"
 
-class cBullet:
-    enemyBullet_image = None
-    PlayerBullet_image1 = None
-    PlayerBullet_image2 = None
-    def __init__(self,x,y, _Bullet_type,Bullet_image):
+class cBullet(cObject):
+    def __init__(self,x,y, Bullet_image, Bullet_image_index):
+        super().__init__(x, y)
 
-        self.ObjectInfo = cObject()
+        self.image = Bullet_image
+        self.image_width = bullet_image_table[Bullet_image_index][2]
+        self.image_height = bullet_image_table[Bullet_image_index][3]
 
-        if cBullet.enemyBullet_image == None:
-            cBullet.enemyBullet_image = load_image("Enemies & Special Projectiles.png")
-        if cBullet.PlayerBullet_image1 == None:
-            cBullet.PlayerBullet_image1 = load_image("Projectiles and Items.png")
-        if(cBullet.PlayerBullet_image2 == None):
-            cBullet.PlayerBullet_image2 = load_image("Players.png")
+        self.width = bullet_image_table[Bullet_image_index][4]
+        self.height = bullet_image_table[Bullet_image_index][5]
 
-        if(_Bullet_type == "P"):
-            self.ObjectInfo.image = cBullet.PlayerBullet_image1
-        elif _Bullet_type == "P2":
-            self.ObjectInfo.image = cBullet.PlayerBullet_image2
-        else:
-            self.ObjectInfo.image = cBullet.enemyBullet_image1
-
-        self.ObjectInfo.x = x
-        self.ObjectInfo.y = y
-
-        self.ObjectInfo.image_width = bullet_image_table[Bullet_image][2]
-        self.ObjectInfo.image_height = bullet_image_table[Bullet_image][3]
-
-        self.ObjectInfo.width = bullet_image_table[Bullet_image][4]
-        self.ObjectInfo.height = bullet_image_table[Bullet_image][5]
-
-        self.ObjectInfo.image_left = bullet_image_table[Bullet_image][0]
-        self.ObjectInfo.image_bottom = self.ObjectInfo.image.h - bullet_image_table[Bullet_image][1]
+        self.image_left = bullet_image_table[Bullet_image_index][0]
+        self.image_bottom = self.image.h - bullet_image_table[Bullet_image_index][1]
 
 
-        self.ObjectInfo.velocity[1] = 1.0
+        self.velocity[1] = 1.0
 
-        self.ObjectInfo.objectType = "Rect"
+        self.objectType = "Rect"
         self.dmg = 1
-    def update(self):
-        self.ObjectInfo.x += self.ObjectInfo.velocity[0] * MainFrameWork.frame_time
-        self.ObjectInfo.y += self.ObjectInfo.velocity[1] * MainFrameWork.frame_time
+
+class pBullet_1(cBullet):
+    image = None
+    def __init__(self, x, y):
+        if(pBullet_1.image == None):
+            pBullet_1.image = load_image("Players.png")
+
+        super().__init__(x,y,self.image , PLAYER1)
+
+class eBullet_1(cBullet):
+    image = None
+    def __init__(self, x, y):
+        if(eBullet_1.image == None):
+            eBullet_1.image = load_image("Projectiles and Items.png")
+        self.image = eBullet_1.image
+
+        super().__init__(x,y,self.image , ZACO1)
 
 
-
-
-
-    def draw(self):
-        self.ObjectInfo.draw()
+def InitBullet(Bullet, rot_degree,velocity_x,velocity_y):
+    # 속도 단위는 km/h
+    Bullet.rot = rot_degree
+    radian = math.radians(rot_degree)
+    Bullet.velocity[0] = math.cos(radian) * get_PPS(velocity_x)
+    Bullet.velocity[1] = math.sin(radian) * get_PPS(velocity_y)
