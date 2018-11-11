@@ -77,8 +77,8 @@ def InitBullet(Bullet, rot_degree,velocity_x,velocity_y):
     # 속도 단위는 km/h, Bullet
     Bullet.rot = rot_degree + 90
     radian = math.radians(rot_degree)
-    Bullet.velocity[0] = math.cos(radian) * get_PPS(velocity_x)
-    Bullet.velocity[1] = math.sin(radian) * get_PPS(velocity_y)
+    Bullet.velocity[0] = math.cos(radian) *velocity_x
+    Bullet.velocity[1] = math.sin(radian) *velocity_y
 
 def InitNWayBullet(Bulletlist, vx0, vy0 , degree):
     rad_step = math.radians(degree)
@@ -96,4 +96,6 @@ def InitNWayBullet(Bulletlist, vx0, vy0 , degree):
         sin = math.sin(rad)
         bullet.velocity[0] = vx0 * cos - vy0 * sin
         bullet.velocity[1] = vx0 * sin + vy0 * cos
+
+        bullet.rot = math.degrees(rad)
         rad += rad_step

@@ -20,9 +20,11 @@ def remove_object(o):
             break
 
 def clear():
+    global objects
     for o in all_objects():
         del o
     objects.clear()
+    objects = [[],[],[]]
 
 
 def all_objects():
@@ -44,9 +46,11 @@ def remove_bullet(o):
 
 
 def clear_bullet():
+    global bullets
     for o in all_bullets():
         del o
     bullets.clear()
+    bullets = [[],[]]
 
 
 def all_bullets():

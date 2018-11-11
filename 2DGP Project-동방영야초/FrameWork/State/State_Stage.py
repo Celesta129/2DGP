@@ -1,5 +1,6 @@
 from pico2d import *
 from FrameWork import MainFrameWork, CEnemy
+from FrameWork.State import State_Pause
 from FrameWork.CPlayer import cPlayer
 from FrameWork import Game_World
 from FrameWork.Calculator import *
@@ -28,25 +29,28 @@ def enter():
     global test_enemy
     if player == None:
         player = cPlayer(240,100)
-        Game_World.add_object(player,Game_World.layer_player)
+
         pass
     if test_enemy == None:
         test_enemy = CEnemy.Zaco1(240,500)
-        Game_World.add_object(test_enemy, Game_World.layer_enemy)
     if image_Main_BG == None:
         image_Main_BG = load_image("MainBackGround.png")
     if Stage_image == None:
         Stage_image = load_image("Stage Character Background Text.png")
     if image_sidebar == None:
         image_sidebar = load_image("Sidebar & Pause Screen.png")
+
+    player.x,player.y = 240,100
+    Game_World.add_object(player, Game_World.layer_player)
+    Game_World.add_object(test_enemy, Game_World.layer_enemy)
 def exit():
-    global image_Main_BG
-    global player
-    del(image_Main_BG)
-
-
+    Game_World.clear()
+    Game_World.clear_bullet()
+    pass
 
 def pause():
+    global player
+    player.velocity = [0,0]
     pass
 
 
@@ -60,7 +64,7 @@ def handle_events():
         if event.type == SDL_QUIT:
             MainFrameWork.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            MainFrameWork.quit()
+            MainFrameWork.push_state(State_Pause)
         else:
             player.handle_event(event)
     pass

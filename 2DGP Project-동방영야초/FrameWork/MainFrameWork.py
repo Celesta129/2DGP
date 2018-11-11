@@ -51,12 +51,26 @@ def change_state(state):
     pass
 
 
-def pop_state(state):
+def pop_state():
+    global stack
+    if (len(stack) > 0):
+        # execute the current state's exit function
+        stack[-1].exit()
+        # remove the current state
+        stack.pop()
+
+    # execute resume function of the previous state
+    if (len(stack) > 0):
+        stack[-1].resume()
     pass
 
 
 def push_state(state):
-    pass
+    global stack
+    if (len(stack) > 0):
+        stack[-1].pause()
+    stack.append(state)
+    state.enter()
 
 
 def quit():

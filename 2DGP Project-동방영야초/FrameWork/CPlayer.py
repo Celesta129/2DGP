@@ -231,7 +231,7 @@ def Init_Bullet(Bullet):
     Bullet.rot = 90
     Bullet.dmg = 1
 
-    bSPEED_KMPH = 100.0  # 60 km/h
+    bSPEED_KMPH = 100.0  # 100 km/h
 
     radian_rot = math.radians(Bullet.rot)
 
