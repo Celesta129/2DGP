@@ -232,14 +232,11 @@ def Init_Bullet(Bullet):
     Bullet.dmg = 1
 
     bSPEED_KMPH = 100.0  # 60 km/h
-    bSPEED_MPM = bSPEED_KMPH * 1000.0 / 60.0
-    bSPEED_MPS = bSPEED_MPM / 60.0
-    bSPEED_PPS = bSPEED_MPS * CObject.PIXEL_PER_METER  # Pixel Per second
 
     radian_rot = math.radians(Bullet.rot)
 
     cos = math.cos(radian_rot)
     sin = math.sin(radian_rot)
 
-    Bullet.velocity[0] = cos * bSPEED_PPS
-    Bullet.velocity[1] = sin * bSPEED_PPS
+    Bullet.velocity[0] = cos * bSPEED_KMPH
+    Bullet.velocity[1] = sin * bSPEED_KMPH

@@ -38,6 +38,20 @@ class cBullet(cObject):
 
         self.objectType = "Rect"
         self.dmg = 1
+    def RotateVelocity(self, degree, vx = None, vy = None):
+        radian = math.radians(degree)
+        cos = math.cos(radian)
+        sin = math.sin(radian)
+
+        vx0 = self.velocity[0]
+        vy0 = self.velocity[1]
+
+        self.velocity[0] = vx0 * cos - vy0 * sin
+        self.velocity[1] = vx0 * sin + vy0 * cos
+
+        if vx != None and vy != None:
+            vx = vx0 * cos - vy0 * sin
+            vy = vx0 * sin + vy0 * cos
 
 class pBullet_1(cBullet):
     image = None
@@ -46,6 +60,7 @@ class pBullet_1(cBullet):
             pBullet_1.image = load_image("Players.png")
 
         super().__init__(x,y,self.image , PLAYER1)
+
 
 class eBullet_1(cBullet):
     image = None
@@ -57,9 +72,28 @@ class eBullet_1(cBullet):
         super().__init__(x,y,self.image , ZACO1)
         self.frame = bullet_color_table2[blue]
 
+
 def InitBullet(Bullet, rot_degree,velocity_x,velocity_y):
     # 속도 단위는 km/h, Bullet
     Bullet.rot = rot_degree + 90
     radian = math.radians(rot_degree)
     Bullet.velocity[0] = math.cos(radian) * get_PPS(velocity_x)
     Bullet.velocity[1] = math.sin(radian) * get_PPS(velocity_y)
+
+def InitNWayBullet(Bulletlist, vx0, vy0 , degree):
+    rad_step = math.radians(degree)
+    rad = 0
+
+    num = len(Bulletlist)
+
+    if num % 2  == 0:
+        rad = -num/2 * rad_step
+    else:
+        rad = (-num/2 + 0.5) * rad_step
+
+    for bullet in Bulletlist:
+        cos = math.cos(rad)
+        sin = math.sin(rad)
+        bullet.velocity[0] = vx0 * cos - vy0 * sin
+        bullet.velocity[1] = vx0 * sin + vy0 * cos
+        rad += rad_step

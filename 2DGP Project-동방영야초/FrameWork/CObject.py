@@ -47,8 +47,13 @@ class cObject:
             #left, bottom, width, height, rad, flip, x, y
         pass
     def move(self):
-        self.x += self.velocity[0] * MainFrameWork.frame_time
-        self.y += self.velocity[1] * MainFrameWork.frame_time
+        bSPEED_KMPH = (self.velocity[0], self.velocity[1])
+        bSPEED_MPM = (bSPEED_KMPH[0] * 1000.0 / 60.0 , bSPEED_KMPH[1] * 1000.0 / 60.0)
+        bSPEED_MPS = (bSPEED_MPM[0] / 60.0 , bSPEED_MPM[1] / 60.0)
+        bSPEED_PPS = (bSPEED_MPS[0] * PIXEL_PER_METER , bSPEED_MPS[1] * PIXEL_PER_METER)  # Pixel Per second
+
+        self.x += bSPEED_PPS[0] * MainFrameWork.frame_time
+        self.y += bSPEED_PPS[1] * MainFrameWork.frame_time
 
     def get_bb(self):
         left = self.x - self.width / 2

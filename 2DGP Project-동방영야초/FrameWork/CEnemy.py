@@ -42,7 +42,7 @@ class Zaco1(cObject):
 
         self.objectType = "Rect"
 
-        self.shot_pattern = SP_1
+        self.shot_pattern = SP_2
         self.bullet = eBullet_1
 
         self.hp = 10
@@ -94,9 +94,31 @@ class SP_1:
         target = Game_World.objects[Game_World.layer_player][0]
         newBullet = Enemy.bullet(Enemy.x,Enemy.y)
 
+
         # 일단 플레이어쪽으로 쏴보자
         rot = math.degrees(Calculator.get_angle_down(Enemy,target))
         # 여기서 필요한 조정
         InitBullet(newBullet, rot, 50, 50)
         Enemy.shot(newBullet)   # 만든 탄환을 레이어에 집어넣기만 하는 함수임.
     pass
+
+class SP_2: # 3way shot
+    @staticmethod
+    def enter(Enemy):
+        pass
+
+    def exit(Enemy):
+        pass
+
+    @staticmethod
+    def shot(Enemy):
+        if (Enemy.bullet == None):
+            pass
+
+        target = Game_World.objects[Game_World.layer_player][0]
+        BulletList = [Enemy.bullet(Enemy.x, Enemy.y) for i in range(3)]
+
+        InitNWayBullet(BulletList,0,-50,30)
+        # 여기서 필요한 조정
+        for Bullet in BulletList:
+            Enemy.shot(Bullet)  # 만든 탄환을 레이어에 집어넣기만 하는 함수임.
