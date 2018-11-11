@@ -30,6 +30,7 @@ SPEED_MPM = SPEED_KMPH * 1000.0 / 60.0
 SPEED_MPS = SPEED_MPM / 60.0
 SPEED_PPS = SPEED_MPS * CObject.PIXEL_PER_METER # Pixel Per second
 
+
 class IdleState:
     image_bottom = 59
     MAX_FRAME = 4
@@ -104,9 +105,15 @@ next_state_table = {
 name = "class_Player"
 class cPlayer(cObject):
     Player_image = None
+    Range_image = None
+    AttackRange = (90,258)
+
     def __init__(self,x,y):
         if cPlayer.Player_image == None:
             cPlayer.Player_image = load_image("Players.png")
+        if(cPlayer.Range_image == None):
+            cPlayer.Range_image = load_image("Projectiles and Items.png")
+
         super().__init__(x,y)
 
         self.image = cPlayer.Player_image
@@ -116,7 +123,7 @@ class cPlayer(cObject):
         self.width = 24
         self.height = 40
 
-        self.image_left = 14
+        self.image_left = 12
         self.image_bottom = cPlayer.Player_image.h - 13
         self.max_frame = 4
 
@@ -213,8 +220,13 @@ class cPlayer(cObject):
                 self.bslow = False
             self.add_event(key_event)
 
-
-        pass
+    def draw(self):
+        cObject.draw(self)
+        if self.bslow == True:
+            cPlayer.Range_image.clip_draw(cPlayer.AttackRange[0],
+                                      cPlayer.Range_image.h - cPlayer.AttackRange[1], 14,14,self.x,self.y)
+        draw_rectangle(self.x - self.width/2,self.y - self.height/2,
+                       self.x + self.width/2,self.y + self.height/2)
 
     def move(self):
         ratio = 1

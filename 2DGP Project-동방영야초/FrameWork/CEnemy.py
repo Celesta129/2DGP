@@ -42,13 +42,13 @@ class Zaco1(cObject):
 
         self.objectType = "Rect"
 
-        self.shot_pattern = SP_2
+        self.shot_pattern = SP_1
+        self.pattern_change(SP_1)
         self.bullet = eBullet_1
 
         self.hp = 10
 
-        self.shot_timer_max = 1.0
-        self.shot_timer = 1.0
+
         pass
 
     def update(self):
@@ -80,7 +80,8 @@ class Zaco1(cObject):
 class SP_1:
     @staticmethod
     def enter(Enemy):
-
+        Enemy.shot_timer = 0.15
+        Enemy.shot_timer_max = 0.15
         pass
 
     def exit(Enemy):
@@ -105,6 +106,8 @@ class SP_1:
 class SP_2: # 3way shot
     @staticmethod
     def enter(Enemy):
+        Enemy.shot_timer = 0.1
+        Enemy.shot_timer_max = 0.1
         pass
 
     def exit(Enemy):
@@ -118,7 +121,7 @@ class SP_2: # 3way shot
         target = Game_World.objects[Game_World.layer_player][0]
         BulletList = [Enemy.bullet(Enemy.x, Enemy.y) for i in range(3)]
 
-        InitNWayBullet(BulletList,0,-50,30)
+        InitNWayBullet(BulletList,0,-55,30)
         # 여기서 필요한 조정
         for Bullet in BulletList:
             Enemy.shot(Bullet)  # 만든 탄환을 레이어에 집어넣기만 하는 함수임.
