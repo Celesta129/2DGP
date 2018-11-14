@@ -103,7 +103,7 @@ next_state_table = {
 
 
 name = "class_Player"
-class cPlayer(cObject):
+class cPlayer(Object):
     Player_image = None
     Range_image = None
     AttackRange = (90,258)
@@ -180,7 +180,7 @@ class cPlayer(cObject):
     def shot(self):
         if self.bshot == True:
             if (self.shot_timer <= 0):
-                Bullet = pBullet_1(self.x, self.y + 5)
+                Bullet = pBullet_normal(self.x, self.y + 5)
                 Init_Bullet(Bullet)
                 Game_World.add_bullet(Bullet,Game_World.layer_pTe)
                 self.shot_timer = self.shot_timer_max
@@ -221,7 +221,7 @@ class cPlayer(cObject):
             self.add_event(key_event)
 
     def draw(self):
-        cObject.draw(self)
+        Object.draw(self)
         if self.bslow == True:
             cPlayer.Range_image.clip_draw(cPlayer.AttackRange[0],
                                       cPlayer.Range_image.h - cPlayer.AttackRange[1], 14,14,self.x,self.y)

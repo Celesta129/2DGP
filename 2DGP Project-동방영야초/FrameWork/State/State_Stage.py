@@ -32,7 +32,7 @@ def enter():
 
         pass
     if test_enemy == None:
-        test_enemy = CEnemy.Zaco1(240,500)
+        test_enemy = CEnemy.Zaco_Blue(240,500)
     if image_Main_BG == None:
         image_Main_BG = load_image("MainBackGround.png")
     if Stage_image == None:

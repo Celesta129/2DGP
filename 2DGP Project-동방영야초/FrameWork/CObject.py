@@ -5,7 +5,7 @@ from FrameWork.Calculator import *
 import math
 PIXEL_PER_METER = 42 / 1.5 # 42Pixel = 1.5Meter
 
-class cObject:
+class Object:
     def __init__(self, x = None, y = None):
         self.x, self.y = 0, 0
         if (None != x): self.x = x
