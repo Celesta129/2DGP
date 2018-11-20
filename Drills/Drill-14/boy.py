@@ -77,8 +77,8 @@ class WalkingState:
     @staticmethod
     def draw(boy):
         # fill here
-        cx, cy = boy.x - boy.bg.window_left, boy.y - boy.bg.window_bottom
-
+        boy.cx, boy.cy = boy.x - boy.bg.window_left, boy.y - boy.bg.window_bottom
+        cx,cy = boy.cx, boy.cy
         if boy.x_velocity > 0:
             boy.image.clip_draw(int(boy.frame) * 100, 100, 100, 100, cx, cy)
             boy.dir = 1

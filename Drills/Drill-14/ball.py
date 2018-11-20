@@ -19,7 +19,10 @@ class Ball:
         return self.x - 10, self.y - 10, self.x + 10, self.y + 10
 
     def draw(self):
-        self.image.draw(400 + self.delta_x, 300 + self.delta_y)
+        x = self.boy.cx
+        y = self.boy.cy
+        #window_left = clamp()
+        self.image.draw(x + self.delta_x, y + self.delta_y)
 
         #draw_rectangle(*self.get_bb())
 
