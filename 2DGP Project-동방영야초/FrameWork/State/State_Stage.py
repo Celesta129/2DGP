@@ -145,7 +145,7 @@ def draw():
     pass
 
 scroll = 0
-scroll_speed = 0.5
+scroll_speed = 0.75
 
 def draw_background():
     global scroll

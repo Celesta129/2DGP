@@ -238,6 +238,8 @@ class cPlayer(Object):
         self.x += self.velocity[0] * MainFrameWork.frame_time * ratio
         self.y += self.velocity[1] * MainFrameWork.frame_time * ratio
 
+    def eat(self,item):
+        pass
 def Init_Bullet(Bullet):
 
     Bullet.rot = 90
