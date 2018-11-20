@@ -1,5 +1,6 @@
 from pico2d import *
-from FrameWork import MainFrameWork, CEnemy
+from FrameWork import MainFrameWork
+from FrameWork.Class.Enemy import CEnemy
 from FrameWork.State import State_Pause
 from FrameWork.CPlayer import cPlayer
 from FrameWork import Game_World
@@ -18,9 +19,11 @@ player = None
 test_enemy = None
 
 STAGE1,STAGE2 = range(2)
-stage_pos_table = {STAGE1:(17,292,258,258),STAGE2:(17,929,255,255)}
+stage_pos_table = {STAGE1:(17,290,255,255),STAGE2:(17,929,255,255)}
 cur_stage_number = STAGE1
 
+# stage = 480 * 550 pixel
+# 1 pixel = 3.57 cm
 def enter():
     global image_Main_BG
     global player
@@ -32,7 +35,7 @@ def enter():
 
         pass
     if test_enemy == None:
-        test_enemy = CEnemy.Zaco_Blue(240,500)
+        test_enemy = CEnemy.Zaco_Blue(240, 500)
     if image_Main_BG == None:
         image_Main_BG = load_image("MainBackGround.png")
     if Stage_image == None:
@@ -71,6 +74,8 @@ def handle_events():
 
 
 def update():
+    global scroll
+    scroll = (scroll + scroll_speed) % 535
     for object in Game_World.all_objects():
         object.update()
     for bullet in Game_World.all_bullets():
@@ -98,16 +103,16 @@ def bullet_collision():
 
     # 몹의 체력이 0이라면 삭제
     for enemy in Game_World.objects[Game_World.layer_enemy]:
-        if enemy.hp <= 0:
+        if enemy.hp <= 0 or Background_coll(enemy):
             Game_World.remove_object(enemy)
             print("delete Enemy")
 
     # 화면 나가면 삭제
     for bullet in Game_World.all_bullets():
-        if True == test_Background_coll(bullet):
+        if True == Background_coll(bullet):
             Game_World.remove_bullet(bullet)
 
-def test_Background_coll(object):
+def Background_coll(object):
     stage_width = 480
     stage_height = 550
 
@@ -140,7 +145,7 @@ def draw():
     pass
 
 scroll = 0
-scroll_speed = 0
+scroll_speed = 0.5
 
 def draw_background():
     global scroll
@@ -151,9 +156,13 @@ def draw_background():
     width = stage_pos_table[cur_stage_number][2]
     height = stage_pos_table[cur_stage_number][3]
 
-    scroll = (scroll + 1) % height
-    x,y = 250,290
-    Stage_image.clip_draw(left,bottom,width,height,x,y, 480, 550)
+
+
+    x,y = 10,15
+
+    #Stage_image.
+    Stage_image.clip_draw_to_origin(left,bottom ,width, height, x, y - scroll, 480, 550)
+    Stage_image.clip_draw_to_origin(left,bottom, width, height, x, 550 - scroll, 480, 550)
 
 def draw_cover():
     #cap
