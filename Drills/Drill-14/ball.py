@@ -9,18 +9,25 @@ class Ball:
     def __init__(self):
         if Ball.image == None:
             Ball.image = load_image('ball21x21.png')
-        self.x, self.y, self.fall_speed = random.randint(0, 1600-1), random.randint(0, 1600-1), 0
+        self.x, self.y = random.randint(0, 1260-1), random.randint(0, 1109-1)
+        #self.x, self.y = 1000,600
 
-    def set_object(self,object):
+    def set_center_object(self,object):
+        self.boy = object
         pass
     def get_bb(self):
         return self.x - 10, self.y - 10, self.x + 10, self.y + 10
 
     def draw(self):
-        self.image.draw(self.x, self.y)
-        draw_rectangle(*self.get_bb())
+        self.image.draw(400 + self.delta_x, 300 + self.delta_y)
+
+        #draw_rectangle(*self.get_bb())
 
     def update(self):
+        # self.window_x = self.boy.x - self.x
+        # self.window_y = self.boy.y - self.y
+        self.delta_x = self.x - self.boy.x
+        self.delta_y  = self.y - self.boy.y
         pass
 
 

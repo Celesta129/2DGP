@@ -32,6 +32,8 @@ def enter():
 
     global balls
     balls = [Ball() for i in range(100)]
+    for ball in balls:
+        ball.set_center_object(boy)
     game_world.add_objects(balls, 1)
 def exit():
     game_world.clear()
