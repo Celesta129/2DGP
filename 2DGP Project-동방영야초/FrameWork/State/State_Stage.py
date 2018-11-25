@@ -121,12 +121,12 @@ def Background_coll(object):
     stage_top = stage_bottom + stage_height
     stage_right = stage_left + stage_width
 
-    if object.y + object.height * 0.5 < stage_bottom \
-            or object.y - object.height * 0.5 > stage_top:
+    if object.y + object.height * 0.5 < stage_bottom - 10 \
+            or object.y - object.height * 0.5 > stage_top + 10:
        return True
 
-    elif object.x + object.width * 0.5 < stage_left \
-            or object.x - object.width * 0.5 > stage_right:
+    elif object.x + object.width * 0.5 < stage_left + 10 \
+            or object.x - object.width * 0.5 > stage_right + 10:
         return True
 
     return False
@@ -145,7 +145,7 @@ def draw():
     pass
 
 scroll = 0
-scroll_speed = 0.75
+scroll_speed = 0.5
 
 def draw_background():
     global scroll
@@ -200,4 +200,17 @@ def draw_scoreboard():
     image_height = logo_height * 1.3
 
     image_sidebar.clip_draw(logo_left,logo_bottom,logo_width,logo_height,650,200,image_width,image_height )
+    pass
+
+def read_file(stage_number):
+    filename = None
+    if stage_number == 0:
+        filename = "Stage_01.txt"
+    elif stage_number == 1:
+        filename = "Stage_02.txt"
+
+    with open(filename,"r") as f:
+        lines = f.readlines()
+        for line in lines:
+            pass
     pass

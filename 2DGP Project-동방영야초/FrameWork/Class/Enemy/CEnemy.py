@@ -77,6 +77,7 @@ class Zaco_Blue(Object):
         if self.cur_shot_pattern_time % self.shot_pattern.pattern_cycle < self.shot_pattern.pattern_breaktime:
             return False
         return True
+
     def shoot(self,bullet):
         Game_World.add_bullet(bullet,Game_World.layer_eTp)
         pass
