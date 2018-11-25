@@ -5,6 +5,7 @@ from FrameWork.State import State_Pause
 from FrameWork.CPlayer import cPlayer
 from FrameWork import Game_World
 from FrameWork.Calculator import *
+from FrameWork.Class.Enemy import Enemy_Generator
 name = "State_Stage"
 
 image_Main_BG = None
@@ -22,6 +23,9 @@ STAGE1,STAGE2 = range(2)
 stage_pos_table = {STAGE1:(17,290,255,255),STAGE2:(17,929,255,255)}
 cur_stage_number = STAGE1
 
+
+enemy_info_array = []
+cur_stage_timeAcc = 0.0
 # stage = 480 * 550 pixel
 # 1 pixel = 3.57 cm
 def enter():
@@ -35,7 +39,7 @@ def enter():
 
         pass
     if test_enemy == None:
-        test_enemy = CEnemy.Zaco_Blue(240, 500)
+        test_enemy = CEnemy.Zaco_Blue.create(240,500)
     if image_Main_BG == None:
         image_Main_BG = load_image("MainBackGround.png")
     if Stage_image == None:
@@ -46,6 +50,8 @@ def enter():
     player.x,player.y = 240,100
     Game_World.add_object(player, Game_World.layer_player)
     Game_World.add_object(test_enemy, Game_World.layer_enemy)
+    Enemy_Generator.read_file(cur_stage_number, enemy_info_array)
+
 def exit():
     Game_World.clear()
     Game_World.clear_bullet()
@@ -75,7 +81,12 @@ def handle_events():
 
 def update():
     global scroll
+    global cur_stage_timeAcc
+
+    cur_stage_timeAcc += MainFrameWork.frame_time
+
     scroll = (scroll + scroll_speed) % 535
+
     for object in Game_World.all_objects():
         object.update()
     for bullet in Game_World.all_bullets():
@@ -83,6 +94,7 @@ def update():
 
     bullet_collision()
 
+    Enemy_Generator.make_Enemy(enemy_info_array, cur_stage_timeAcc)
     pass
 def bullet_collision():
     # 충돌체크
@@ -201,16 +213,13 @@ def draw_scoreboard():
 
     image_sidebar.clip_draw(logo_left,logo_bottom,logo_width,logo_height,650,200,image_width,image_height )
     pass
+def cur_stage():
+    return cur_stage_number
 
-def read_file(stage_number):
-    filename = None
-    if stage_number == 0:
-        filename = "Stage_01.txt"
-    elif stage_number == 1:
-        filename = "Stage_02.txt"
+def change_stage(stage_num):
+    global enemy_info_array
+    global cur_stage_number
+    cur_stage_number = stage_num
 
-    with open(filename,"r") as f:
-        lines = f.readlines()
-        for line in lines:
-            pass
+    Enemy_Generator.read_file(cur_stage_number,enemy_info_array)
     pass

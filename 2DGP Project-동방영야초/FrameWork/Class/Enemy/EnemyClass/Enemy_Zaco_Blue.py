@@ -6,7 +6,7 @@ from FrameWork.Calculator import *
 from FrameWork.CBullet import *
 from FrameWork.Class.Enemy.ShotPattern.ShotPattern import *
 from FrameWork.Class.Enemy.MovePattern.MovePattern import *
-name = "class_CEnemy"
+name = "class_Zaco_Blue"
 #FRAMES_PER_ACTION
 #ACTION_PER_TIME
 #game_framework.frame_time) % 8
@@ -58,8 +58,8 @@ class Zaco_Blue(Object):
         self.hp = 10
 
     @staticmethod
-    def create(x, y):
-        return Zaco_Blue(x, y)
+    def create(x,y):
+        return Zaco_Blue(x,y)
 
     def update(self):
         MAX_FRAME =  self.max_frame

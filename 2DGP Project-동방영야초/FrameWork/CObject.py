@@ -9,7 +9,7 @@ PIXEL_PER_METER = 42 / 1.5 # 42Pixel = 1.5Meter
 # 1 pixel = 3.57 cm
 class Object:
     def __init__(self, x = None, y = None):
-        self.x, self.y = 0, 0
+        self.x, self.y = 0.0, 0.0
         if (None != x): self.x = x
         if (None != y): self.y = y
 
