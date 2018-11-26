@@ -1,5 +1,6 @@
 from FrameWork import Game_World
-from FrameWork.Class.Enemy.EnemyClass import Enemy_Zaco_Blue
+from FrameWork.Class.Enemy.EnemyClass.Enemy_Zaco_Blue import Zaco_Blue
+from FrameWork.Class.Enemy.EnemyClass.Enemy_Zaco_Red import Zaco_Red
 
 from FrameWork.Game_World import *
 name = "Enemy_Generator"
@@ -20,7 +21,7 @@ def read_file(stage_number,final_object_info):
             # 구분자 단위로 숫자를 읽어들인다.
             for character in line:
                 if character == "|":
-                    read_array_to_int(array, final_object_info)
+                    read_array_to_float(array, final_object_info)
                     array = ""
                 else:
                     array += character
@@ -35,10 +36,11 @@ def read_file(stage_number,final_object_info):
 ENEMYTYPE, POSX, POSY = range(3)
 ZACO_BLUE,ZACO_RED = range(2)
 
-enemy_table = {ZACO_BLUE : Enemy_Zaco_Blue.Zaco_Blue}
+enemy_table = {ZACO_BLUE : Zaco_Blue,
+               ZACO_RED : Zaco_Red}
 
-def read_array_to_int(array, output_array):
-    value = int(array)
+def read_array_to_float(array, output_array):
+    value = float(array)
     output_array.append(value)
 
 
@@ -50,7 +52,6 @@ def make_Enemy(info_array, cur_stage_timeacc):
         return
 
     Enemy_type = info_array[1]
-
 
     x,y = info_array[2],info_array[3]
     Enemy = enemy_table[Enemy_type](x,y)

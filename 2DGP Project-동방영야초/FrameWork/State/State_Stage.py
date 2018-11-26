@@ -1,6 +1,6 @@
 from pico2d import *
 from FrameWork import MainFrameWork
-from FrameWork.Class.Enemy import CEnemy
+from FrameWork.Class.Enemy.EnemyClass import Enemy_Zaco_Blue
 from FrameWork.State import State_Pause
 from FrameWork.CPlayer import cPlayer
 from FrameWork import Game_World
@@ -39,7 +39,7 @@ def enter():
 
         pass
     if test_enemy == None:
-        test_enemy = CEnemy.Zaco_Blue.create(240,500)
+        pass
     if image_Main_BG == None:
         image_Main_BG = load_image("MainBackGround.png")
     if Stage_image == None:
@@ -49,8 +49,8 @@ def enter():
 
     player.x,player.y = 240,100
     Game_World.add_object(player, Game_World.layer_player)
-    Game_World.add_object(test_enemy, Game_World.layer_enemy)
-    Enemy_Generator.read_file(cur_stage_number, enemy_info_array)
+
+    change_stage(cur_stage_number)
 
 def exit():
     Game_World.clear()
@@ -172,7 +172,7 @@ def draw_background():
 
     x,y = 10,15
 
-    #Stage_image.
+    #Stage_image. right = 480, top = 550
     Stage_image.clip_draw_to_origin(left,bottom ,width, height, x, y - scroll, 480, 550)
     Stage_image.clip_draw_to_origin(left,bottom, width, height, x, 550 - scroll, 480, 550)
 
@@ -213,8 +213,6 @@ def draw_scoreboard():
 
     image_sidebar.clip_draw(logo_left,logo_bottom,logo_width,logo_height,650,200,image_width,image_height )
     pass
-def cur_stage():
-    return cur_stage_number
 
 def change_stage(stage_num):
     global enemy_info_array

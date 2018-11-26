@@ -12,11 +12,11 @@ name = "class_Zaco_Blue"
 #game_framework.frame_time) % 8
 
 
-class Zaco_Blue(Object):
+class Zaco_Red(Object):
 
     enemy_image = None
     LEFT = 10
-    BOTTOM = 38
+    BOTTOM = 38 + 32
 
     WIDTH = 20
     HEIGHT = 24
@@ -27,17 +27,17 @@ class Zaco_Blue(Object):
 
     def __init__(self,x = None,y = None):
         super().__init__(x,y)
-        if Zaco_Blue.enemy_image == None:
-            Zaco_Blue.enemy_image = load_image("Enemies & Special Projectiles.png")
+        if Zaco_Red.enemy_image == None:
+            Zaco_Red.enemy_image = load_image("Enemies & Special Projectiles.png")
 
-        self.image = Zaco_Blue.enemy_image
+        self.image = Zaco_Red.enemy_image
 
-        self.image_left, self.image_bottom = Zaco_Blue.LEFT, Zaco_Blue.enemy_image.h - Zaco_Blue.BOTTOM
-        self.width,self.height = Zaco_Blue.WIDTH, Zaco_Blue.HEIGHT
-        self.image_width, self.image_height = Zaco_Blue.IMAGE_WIDTH, Zaco_Blue.IMAGE_HEIGHT
+        self.image_left, self.image_bottom = Zaco_Red.LEFT, Zaco_Red.enemy_image.h - Zaco_Red.BOTTOM
+        self.width,self.height = Zaco_Red.WIDTH, Zaco_Red.HEIGHT
+        self.image_width, self.image_height = Zaco_Red.IMAGE_WIDTH, Zaco_Red.IMAGE_HEIGHT
 
         self.frame = 0
-        self.max_frame = Zaco_Blue.MAX_FRAME
+        self.max_frame = Zaco_Red.MAX_FRAME
 
         self.objectType = "Rect"
 
