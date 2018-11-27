@@ -64,7 +64,7 @@ def update():
     for game_object in game_world.all_objects():
         if game_object != boy:
             if collide(boy,game_object) :
-                
+                game_framework.push_state()
 
 def draw():
     clear_canvas()

@@ -131,7 +131,7 @@ class Boy:
 
     def __getstate__(self):
         # fill here
-        state = {'x': self.x, 'y': self.y, 'dir': self.dir, 'cur_state': self.cur_state}
+        state = {'x': self.x, 'y': self.y, 'dir': self.dir, 'cur_state': self.cur_state, 'Time': get_time() - self.start_time}
         return state
 
 
