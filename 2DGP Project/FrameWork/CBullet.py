@@ -5,14 +5,18 @@ from FrameWork import Game_World
 from FrameWork.Calculator import *
 
 BLACK, RED1, RED2, PURPLE1, PURPLE2, BLUE1, BLUE2, CYAN1, CYAN2, GREEN1, GREEN2, GREEN3, YELLOW1,YELLOW2, YELLOW3,WHITE = range(16)
-black, red, purple, blue, cyan, green, yellow, white = range(8)
 bullet_color_table = [BLACK, RED1, RED2, PURPLE1, PURPLE2, BLUE1, BLUE2, CYAN1, CYAN2, GREEN1, GREEN2, GREEN3, YELLOW1, YELLOW2, YELLOW3, WHITE]
-bullet_color_table2 = [black, red, purple, blue, cyan, green, yellow, white]
-ZACO1, ZACO2, PLAYER1  = range(3)
-# left, bottom, image_width, image_height, width, height
 
-bullet_image_table = { ZACO1 : (7, 493, 32, 28, 14,28),
-                        ZACO2  :(33, 174, 25, 25, 12,14),
+black, red, purple, blue, cyan, green, yellow, white = range(8)
+bullet_color_table2 = [black, red, purple, blue, cyan, green, yellow, white]
+
+#bullet_index_name
+RICE, WEDGE, SMALL_RICE, PLAYER1  = range(4)
+
+# left, bottom, image_width, image_height, width, height
+bullet_image_table = { RICE : (7, 493, 32, 28, 14,28),
+                       WEDGE  :(10, 36, 16, 16, 12,14),
+                       SMALL_RICE: (10, 83, 16, 16, 8, 16),
                        PLAYER1 : (35,167,40,12, 38,12)
                      }
 
@@ -63,20 +67,39 @@ class pBullet_normal(cBullet):
         super().__init__(x,y,self.image , PLAYER1)
 
 
-class eBullet_rice_blue(cBullet):
+class Bullet_rice(cBullet):
     image = None
-    def __init__(self, x, y):
-        if(eBullet_rice_blue.image == None):
-            eBullet_rice_blue.image = load_image("Projectiles and Items.png")
-        self.image = eBullet_rice_blue.image
+    def __init__(self, x, y, bullet_color):
+        if(Bullet_rice.image == None):
+            Bullet_rice.image = load_image("Projectiles and Items.png")
+        self.image = Bullet_rice.image
 
-        super().__init__(x,y,self.image , ZACO1)
-        self.frame = bullet_color_table2[blue]
+        super().__init__(x,y,self.image , RICE)
+        self.frame = bullet_color_table2[bullet_color]
 
+class Bullet_Wedge(cBullet):
+    image = None
+    def __init__(self, x, y, bullet_color):
+        if (Bullet_Wedge.image == None):
+            Bullet_Wedge.image = load_image("Projectiles and Items.png")
+        self.image = Bullet_Wedge.image
+
+        super().__init__(x, y, self.image, WEDGE)
+        self.frame = bullet_color_table[bullet_color]
+
+class Bullet_SmallRice(cBullet):
+    image = None
+    def __init__(self, x, y, bullet_color):
+        if(Bullet_SmallRice.image == None):
+            Bullet_SmallRice.image = load_image("Projectiles and Items.png")
+        self.image = Bullet_SmallRice.image
+
+        super().__init__(x, y, self.image, SMALL_RICE)
+        self.frame = bullet_color_table[bullet_color]
 
 def InitBullet(Bullet, rot_degree = 0,velocity_x = 0, velocity_y = -1):
     # 속도 단위는 km/h, Bullet
-    Bullet.rot += rot_degree
+    Bullet.rot += rot_degree + 180
     radian = math.radians(rot_degree)
     Bullet.velocity[0] = math.cos(radian) * velocity_x
     Bullet.velocity[1] = math.sin(radian) * velocity_y

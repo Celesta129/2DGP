@@ -25,7 +25,7 @@ class Zaco_Red(Object):
     IMAGE_HEIGHT = 32
     MAX_FRAME = 4
 
-    def __init__(self,x = None,y = None):
+    def __init__(self,x ,y, move_pattern, shot_pattern):
         super().__init__(x,y)
         if Zaco_Red.enemy_image == None:
             Zaco_Red.enemy_image = load_image("Enemies & Special Projectiles.png")
@@ -45,15 +45,14 @@ class Zaco_Red(Object):
         self.shot_timer = 0.0
         self.shot_timer_max = 0.0
 
-        self.shot_pattern = SP_Aiming
+        self.shot_pattern = SP_Aiming_BlueWedge
         #SP_Aiming
         #SP_3way_Shot
-        self.change_shot_pattern(SP_Aiming)
-        self.bullet = eBullet_rice_blue
+        self.change_shot_pattern(shot_pattern)
 
         self.cur_move_pattern_time = 0.0
-        self.move_pattern = MP_go_straight
-        self.change_move_pattern(MP_go_straight)
+        self.move_pattern = move_pattern
+        self.change_move_pattern(move_pattern)
 
         self.hp = 10
 

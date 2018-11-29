@@ -25,7 +25,7 @@ class Zaco_Blue(Object):
     IMAGE_HEIGHT = 32
     MAX_FRAME = 4
 
-    def __init__(self,x = None,y = None):
+    def __init__(self,x ,y, move_pattern, shot_pattern):
         super().__init__(x,y)
         if Zaco_Blue.enemy_image == None:
             Zaco_Blue.enemy_image = load_image("Enemies & Special Projectiles.png")
@@ -41,19 +41,19 @@ class Zaco_Blue(Object):
 
         self.objectType = "Rect"
 
+        #현재 사격패턴에 들어간 시간
         self.cur_shot_pattern_time = 0.0
+        #한 발의 사격에 필요한 시간
         self.shot_timer = 0.0
+        # 타이머 초기화값
         self.shot_timer_max = 0.0
 
-        self.shot_pattern = SP_Aiming
-        #SP_Aiming
-        #SP_3way_Shot
-        self.change_shot_pattern(SP_Aiming)
-        self.bullet = eBullet_rice_blue
+        self.shot_pattern = shot_pattern
+        self.change_shot_pattern(shot_pattern)
 
         self.cur_move_pattern_time = 0.0
-        self.move_pattern = MP_go_straight
-        self.change_move_pattern(MP_go_straight)
+        self.move_pattern = move_pattern
+        self.change_move_pattern(move_pattern)
 
         self.hp = 10
 

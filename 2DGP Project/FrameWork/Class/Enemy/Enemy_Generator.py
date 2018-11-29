@@ -1,6 +1,9 @@
 from FrameWork import Game_World
 from FrameWork.Class.Enemy.EnemyClass.Enemy_Zaco_Blue import Zaco_Blue
 from FrameWork.Class.Enemy.EnemyClass.Enemy_Zaco_Red import Zaco_Red
+
+from FrameWork.Class.Enemy.MovePattern.MovePattern import *
+from FrameWork.Class.Enemy.ShotPattern.ShotPattern import *
 import json
 from FrameWork.Game_World import *
 name = "Enemy_Generator"
@@ -25,10 +28,17 @@ def read_file(stage_number):
 # Third "|" = posX
 # fourth "|" = posY
 
-ENEMYTYPE, POSX, POSY = range(3)
+ENEMYTYPE, POSX, POSY,MP,SP = range(5)
 
 enemy_table = {"ZACO_BLUE" : Zaco_Blue,
-               "ZACO_RED" : Zaco_Red}
+               "ZACO_RED" : Zaco_Red }
+
+MP_table = {"MP_GO_STRAIGHT" : MP_go_straight,
+            "MP_GO_RIGHT" : MP_go_right,
+            "MP_GO_LEFT" : MP_go_left }
+
+SP_table = {"SP_AIMING_BLUEWEDGE": SP_Aiming_BlueWedge,
+            "SP_360_BUM_SMALLRICE": SP_360_bum_smallrice}
 
 def load_dic_by_json(file):
     array = json.load(file)
@@ -49,8 +59,14 @@ def make_Enemy(info_array, cur_stage_timeacc):
     Enemy_type = info_array[0]["Type"]
 
     x,y = info_array[0]["x"], info_array[0]["y"]
-    Enemy = enemy_table[Enemy_type](x,y)
+    MP,SP = info_array[0]["MP"], info_array[0]["SP"]
+
+    MP = MP_table[MP]
+    SP = SP_table[SP]
+
+    Enemy = enemy_table[Enemy_type](x,y,MP,SP)
 
     Game_World.add_object(Enemy,Game_World.layer_enemy)
     info_array.pop(0)
     pass
+#{"Time": ,  "Type": "", "x": ,  "y": ,  "MP": "", "SP": "" }

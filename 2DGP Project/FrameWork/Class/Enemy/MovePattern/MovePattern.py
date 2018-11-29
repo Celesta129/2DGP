@@ -17,3 +17,36 @@ class MP_go_straight:
     def update(Enemy):
         Enemy.move()
         pass
+
+class MP_go_right:
+    @staticmethod
+    def enter(Enemy):
+        Enemy.velocity[0] = 20.0
+        Enemy.velocity[1] = 0.0  # km/h
+        pass
+
+    @staticmethod
+    def exit(Enemy):
+        pass
+    @staticmethod
+    def update(Enemy):
+        Enemy.move()
+        pass
+
+class MP_go_left:
+    @staticmethod
+    def enter(Enemy):
+        Enemy.velocity[0] = -20.0
+        Enemy.velocity[1] = 0.0  # km/h
+        pass
+
+    @staticmethod
+    def exit(Enemy):
+        pass
+
+    @staticmethod
+    def update(Enemy):
+        Enemy.move()
+        pass
+
+

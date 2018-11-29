@@ -1,6 +1,28 @@
 [
 
-{"Time": 1.0, "Type": "ZACO_RED","x":  50, "y": 550 },
-{"Time": 5.0, "Type": "ZACO_BLUE","x":  150, "y": 550 }
+  {    "Time": 3.0,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 3.2,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 3.4,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 3.6,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 3.8,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {    "Time": 5.0,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 5.2,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 5.4,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 5.6,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 5.8,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {
+    "Time": 6.0,
+    "Type": "ZACO_BLUE",
+    "x": 240,
+    "y": 550,
+    "MP": "MP_GO_STRAIGHT",
+    "SP": "SP_360_BUM_SMALLRICE"
+  },
+
+
+  {    "Time": 5.0,    "Type": "ZACO_BLUE",    "x": 150,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  }
 
 ]
+

@@ -138,7 +138,7 @@ def Background_coll(object):
             or object.y - object.height * 0.5 > stage_top + 10:
        return True
 
-    elif object.x + object.width * 0.5 < stage_left + 10 \
+    elif object.x + object.width * 0.5 < stage_left - 10 \
             or object.x - object.width * 0.5 > stage_right + 10:
         return True
 
