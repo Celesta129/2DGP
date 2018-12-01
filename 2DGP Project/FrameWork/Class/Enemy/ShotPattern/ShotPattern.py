@@ -80,3 +80,4 @@ class SP_360_bum_smallrice:
         # 여기서 필요한 조정
         for bullet in bulletlist:
             Enemy.shoot(bullet)
+

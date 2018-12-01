@@ -11,12 +11,13 @@ black, red, purple, blue, cyan, green, yellow, white = range(8)
 bullet_color_table2 = [black, red, purple, blue, cyan, green, yellow, white]
 
 #bullet_index_name
-RICE, WEDGE, SMALL_RICE, PLAYER1  = range(4)
+RICE, WEDGE, SMALL_RICE, CIRCLE, PLAYER1  = range(5)
 
 # left, bottom, image_width, image_height, width, height
 bullet_image_table = { RICE : (7, 493, 32, 28, 14,28),
                        WEDGE  :(10, 36, 16, 16, 12,14),
                        SMALL_RICE: (10, 83, 16, 16, 8, 16),
+                       CIRCLE:(10, 67, 16, 16, 16, 16),
                        PLAYER1 : (35,167,40,12, 38,12)
                      }
 
@@ -96,6 +97,18 @@ class Bullet_SmallRice(cBullet):
 
         super().__init__(x, y, self.image, SMALL_RICE)
         self.frame = bullet_color_table[bullet_color]
+
+class Bullet_Circle(cBullet):
+    image = None
+    def __init(self, x, y, bullet_color):
+        if(Bullet_Circle.image == None):
+            Bullet_Circle.image = load_image("Projectiles and Items.png")
+        self.image = Bullet_Circle.image
+
+        super().__init__(x, y, self.image, CIRCLE)
+        self.frame = bullet_color_table[bullet_color]
+        self.radius = 8
+        self.objectType = "Circle"
 
 def InitBullet(Bullet, rot_degree = 0,velocity_x = 0, velocity_y = -1):
     # 속도 단위는 km/h, Bullet
