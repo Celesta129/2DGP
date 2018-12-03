@@ -14,8 +14,8 @@ def read_file(stage_number):
 
     filename = None
     if stage_number == 0:
-        #filename = "Stage_01.json"
-        filename = "Test.json"
+        filename = "Stage_01.json"
+        #filename = "Test.json"
     elif stage_number == 1:
         filename = "Stage_02.json"
     else:

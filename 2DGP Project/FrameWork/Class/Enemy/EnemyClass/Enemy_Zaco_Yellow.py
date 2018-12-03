@@ -61,7 +61,7 @@ class Zaco_Yellow(Object):
         for i in range(len(self.bullet_generators)):
             self.bullet_generators[i].rot += i * 360/len(self.bullet_generators)
 
-        self.hp = 10
+        self.hp = 12
     def draw(self):
         super().draw()
         for generator in self.bullet_generators:

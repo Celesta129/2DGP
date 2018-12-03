@@ -115,7 +115,7 @@ class cPlayer(Object):
             cPlayer.Range_image = load_image("Projectiles and Items.png")
 
         super().__init__(x,y)
-
+        self.font = load_font('ENCR10B.TTF', 20)
         self.image = cPlayer.Player_image
         self.image_width = 32
         self.image_height = 46
@@ -133,10 +133,11 @@ class cPlayer(Object):
         self.bshot = False
         self.bslow = False
 
-        self.shot_timer_max = 0.05
-        self.shot_timer = 0.00
+        self.shot_timer_max = 0.1
+        self.shot_timer = 0.1
 
         self.objectType = "Circle"
+        self.hp = 1000
     def add_event(self, event):
         self.event_que.insert(0,event)
 
@@ -180,9 +181,11 @@ class cPlayer(Object):
     def shot(self):
         if self.bshot == True:
             if (self.shot_timer <= 0):
-                Bullet = pBullet_normal(self.x, self.y + 5)
-                Init_Bullet(Bullet)
-                Game_World.add_bullet(Bullet,Game_World.layer_pTe)
+                Bulletlist = [pBullet_normal(self.x, self.y + 5) for i in range(3)]
+                InitNWayBullet(Bulletlist,0,100,15)
+                for Bullet in Bulletlist:
+                    Init_Bullet(Bullet)
+                    Game_World.add_bullet(Bullet,Game_World.layer_pTe)
                 self.shot_timer = self.shot_timer_max
                 print('Shot')
             else:
@@ -242,15 +245,7 @@ class cPlayer(Object):
         pass
 def Init_Bullet(Bullet):
 
-    Bullet.rot = 90
+    Bullet.rot += 90
     Bullet.dmg = 1
 
-    bSPEED_KMPH = 100.0  # 100 km/h
 
-    radian_rot = math.radians(Bullet.rot)
-
-    cos = math.cos(radian_rot)
-    sin = math.sin(radian_rot)
-
-    Bullet.velocity[0] = cos * bSPEED_KMPH
-    Bullet.velocity[1] = sin * bSPEED_KMPH

@@ -55,7 +55,7 @@ class Zaco_Blue(Object):
         self.move_pattern = move_pattern
         self.change_move_pattern(move_pattern)
 
-        self.hp = 1
+        self.hp = 2
 
 
     def update(self):

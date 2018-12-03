@@ -28,6 +28,8 @@ class Boss(Object):
     MAX_FRAME = 1
 
     def __init__(self,x ,y, move_pattern, shot_pattern):
+        global bgm
+
         super().__init__(x,y)
         if Boss.enemy_image == None:
             Boss.enemy_image = load_image("Stage Character Background Text.png")
@@ -60,6 +62,8 @@ class Boss(Object):
         self.hp = 500
 
         self.bullet_generators = []
+        bgm = load_music("Master_Spark.mp3")
+        bgm.repeat_play()
     def update(self):
         MAX_FRAME =  self.max_frame
         TIME_PER_ACTION = 0.5
@@ -80,9 +84,10 @@ class Boss(Object):
             self.shot_pattern.shot(self)
 
     def draw(self):
-        super().draw()
         for generator in self.bullet_generators:
             generator.draw()
+        super().draw()
+
 
     def check_cycle(self):
         if self.cur_shot_pattern_time % self.shot_pattern.pattern_cycle < self.shot_pattern.pattern_cycle - self.shot_pattern.pattern_breaktime:

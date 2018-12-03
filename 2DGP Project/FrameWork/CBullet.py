@@ -12,13 +12,14 @@ black, red, purple, blue, cyan, green, yellow, white = range(8)
 bullet_color_table2 = [black, red, purple, blue, cyan, green, yellow, white]
 
 #bullet_index_name
-RICE, WEDGE, SMALL_RICE, SMALL_STAR, CIRCLE, PLAYER1  = range(6)
+RICE, WEDGE, SMALL_RICE, SMALL_STAR, LARGE_STAR, CIRCLE, PLAYER1  = range(7)
 
 # left, bottom, image_width, image_height, width, height
 bullet_image_table = { RICE : (7, 493, 32, 28, 14,28),
                        WEDGE  :(10, 36, 16, 16, 12,14),
                        SMALL_RICE: (10, 83, 16, 16, 8, 16),
                        SMALL_STAR: (7, 319, 16, 14, 14, 14),
+                       LARGE_STAR : (6, 301, 32, 28, 28, 28),
                        CIRCLE:(10, 67, 16, 16, 16, 16),
                        PLAYER1 : (35,167,40,12, 38,12)
                      }
@@ -140,6 +141,23 @@ class Bullet_SmallStar(cBullet):
         self.frame = bullet_color_table[bullet_color]
 
         Bullet_SmallStar.sound.play()
+class Bullet_LargeStar(cBullet):
+    image = None
+    sound = None
+    def __init__(self, x, y, bullet_color):
+        if(Bullet_LargeStar.image == None):
+            Bullet_LargeStar.image = load_image("Projectiles and Items.png")
+
+        Bullet_LargeStar.sound = load_wav('se_kira00.wav')
+        Bullet_LargeStar.sound.set_volume(15)
+
+        self.image = Bullet_LargeStar.image
+
+        super().__init__(x, y, self.image, LARGE_STAR)
+        self.radius = 10
+        self.frame = bullet_color_table2[bullet_color]
+
+        Bullet_LargeStar.sound.play()
 
 class Bullet_Circle(cBullet):
     image = None

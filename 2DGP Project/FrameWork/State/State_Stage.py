@@ -59,6 +59,8 @@ def enter():
 
 
 def exit():
+    global bgm
+    bgm.stop()
     Game_World.clear()
     Game_World.clear_bullet()
     pass
@@ -118,7 +120,7 @@ def bullet_collision():
             if True == collision(bullet, player):
                 print("eTp Bullet Collision")
                 Game_World.remove_bullet(bullet)
-
+                player.hp -= bullet.dmg
 
     # 몹의 체력이 0이라면 삭제
     for enemy in Game_World.objects[Game_World.layer_enemy]:
@@ -160,6 +162,8 @@ def draw():
     for bullet in Game_World.all_bullets():
         bullet.draw()
     draw_cover()
+
+    player.font.draw(500, 500, 'myHP: %d' % player.hp ,(255,255,255))
     update_canvas()
     pass
 

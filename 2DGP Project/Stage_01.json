@@ -134,6 +134,8 @@
   {    "Time": 61.0,    "Type": "ZACO_YELLOW",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
 
   {    "Time": 65.0,    "Type": "ZACO_YELLOW",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
-  {    "Time": 65.0,    "Type": "ZACO_YELLOW",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  }
+  {    "Time": 65.0,    "Type": "ZACO_YELLOW",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
+
+  {    "Time": 75.0,    "Type": "BOSS",    "x": 240,    "y": 550,    "MP": "MP_BOSS1",    "SP": "SP_NONE"  }
 ]
 
