@@ -12,14 +12,7 @@
   {    "Time": 5.6,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
   {    "Time": 5.8,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
 
-  {
-    "Time": 6.0,
-    "Type": "ZACO_BLUE",
-    "x": 240,
-    "y": 550,
-    "MP": "MP_GO_STRAIGHT",
-    "SP": "SP_360_BUM_SMALLRICE"
-  },
+  {    "Time": 6.0,    "Type": "ZACO_BLUE",    "x": 240,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_360_BUM_SMALLRICE"  },
 
 
   {    "Time": 5.0,    "Type": "ZACO_BLUE",    "x": 150,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  }

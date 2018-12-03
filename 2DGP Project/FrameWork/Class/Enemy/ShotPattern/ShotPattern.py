@@ -81,3 +81,32 @@ class SP_360_bum_smallrice:
         for bullet in bulletlist:
             Enemy.shoot(bullet)
 
+class SP_back_blueCircle:
+    # Enemy need Bullet Generator
+    pattern_cycle = 1.5
+    pattern_breaktime = 1.0
+    color = BLUE1
+
+    def enter(Enemy):
+        Enemy.shot_timer = 0.3
+        Enemy.shot_timer_max = 0.3
+        pass
+
+    def exit(Enemy):
+        pass
+
+    @staticmethod
+    def shot(Enemy):
+        target = Game_World.objects[Game_World.layer_player][0]
+        #newBullet = Bullet_Circle(Enemy.x, Enemy.y, SP_back_blueCircle.color)
+
+        # 일단 플레이어쪽으로 쏴보자
+
+        for generator in Enemy.bullet_generators :
+            bullet = Bullet_Circle(generator.x, generator.y, SP_back_blueCircle.color)
+            radian = math.radians(generator.rot + 90)
+            speed = 30
+            bullet.velocity[0] = (math.cos(radian) - math.sin(radian)) * speed
+            bullet.velocity[1] = (math.sin(radian) + math.cos(radian)) * speed
+            # 여기서 필요한 조정
+            Enemy.shoot(bullet)

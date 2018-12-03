@@ -1,6 +1,7 @@
 from FrameWork import Game_World
 from FrameWork.Class.Enemy.EnemyClass.Enemy_Zaco_Blue import Zaco_Blue
 from FrameWork.Class.Enemy.EnemyClass.Enemy_Zaco_Red import Zaco_Red
+from FrameWork.Class.Enemy.EnemyClass.Enemy_Zaco_Yellow import Zaco_Yellow
 
 from FrameWork.Class.Enemy.MovePattern.MovePattern import *
 from FrameWork.Class.Enemy.ShotPattern.ShotPattern import *
@@ -12,7 +13,7 @@ def read_file(stage_number):
 
     filename = None
     if stage_number == 0:
-        filename = "Stage_01.json"
+        filename = "Test.json"
     elif stage_number == 1:
         filename = "Stage_02.json"
     else:
@@ -31,14 +32,18 @@ def read_file(stage_number):
 ENEMYTYPE, POSX, POSY,MP,SP = range(5)
 
 enemy_table = {"ZACO_BLUE" : Zaco_Blue,
-               "ZACO_RED" : Zaco_Red }
+               "ZACO_RED" : Zaco_Red,
+               "ZACO_YELLOW" : Zaco_Yellow
+               }
 
 MP_table = {"MP_GO_STRAIGHT" : MP_go_straight,
             "MP_GO_RIGHT" : MP_go_right,
             "MP_GO_LEFT" : MP_go_left }
 
 SP_table = {"SP_AIMING_BLUEWEDGE": SP_Aiming_BlueWedge,
-            "SP_360_BUM_SMALLRICE": SP_360_bum_smallrice}
+            "SP_360_BUM_SMALLRICE": SP_360_bum_smallrice,
+            "SP_BACK_BLUECIRCLE" : SP_back_blueCircle
+            }
 
 def load_dic_by_json(file):
     array = json.load(file)

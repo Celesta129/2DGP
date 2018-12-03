@@ -3,6 +3,7 @@ from FrameWork.CObject import Object
 from FrameWork import MainFrameWork
 from FrameWork import Game_World
 from FrameWork.Calculator import *
+#from FrameWork.Sound.MySound import *
 
 BLACK, RED1, RED2, PURPLE1, PURPLE2, BLUE1, BLUE2, CYAN1, CYAN2, GREEN1, GREEN2, GREEN3, YELLOW1,YELLOW2, YELLOW3,WHITE = range(16)
 bullet_color_table = [BLACK, RED1, RED2, PURPLE1, PURPLE2, BLUE1, BLUE2, CYAN1, CYAN2, GREEN1, GREEN2, GREEN3, YELLOW1, YELLOW2, YELLOW3, WHITE]
@@ -61,46 +62,70 @@ class cBullet(Object):
 
 class pBullet_normal(cBullet):
     image = None
+    sound = None
+
     def __init__(self, x, y):
         if(pBullet_normal.image == None):
             pBullet_normal.image = load_image("Players.png")
+        if(pBullet_normal.sound == None):
+            pBullet_normal.sound =  load_wav('se_plst00.wav')
+            pBullet_normal.sound.set_volume(15)
 
         super().__init__(x,y,self.image , PLAYER1)
-
+        pBullet_normal.sound.play()
 
 class Bullet_rice(cBullet):
     image = None
+    sound = None
+
     def __init__(self, x, y, bullet_color):
         if(Bullet_rice.image == None):
             Bullet_rice.image = load_image("Projectiles and Items.png")
+        if (Bullet_rice.sound == None):
+            Bullet_rice.sound = load_wav('se_tan00.wav')
+            Bullet_rice.sound.set_volume(10)
+
         self.image = Bullet_rice.image
 
         super().__init__(x,y,self.image , RICE)
         self.frame = bullet_color_table2[bullet_color]
-
+        Bullet_rice.sound.play()
 class Bullet_Wedge(cBullet):
     image = None
+    sound = None
     def __init__(self, x, y, bullet_color):
         if (Bullet_Wedge.image == None):
             Bullet_Wedge.image = load_image("Projectiles and Items.png")
+        if (Bullet_Wedge.sound == None):
+            Bullet_Wedge.sound = load_wav('se_tan00.wav')
+            Bullet_Wedge.sound.set_volume(10)
+
         self.image = Bullet_Wedge.image
 
         super().__init__(x, y, self.image, WEDGE)
         self.frame = bullet_color_table[bullet_color]
+        Bullet_Wedge.sound.play()
 
 class Bullet_SmallRice(cBullet):
     image = None
+    sound = None
     def __init__(self, x, y, bullet_color):
         if(Bullet_SmallRice.image == None):
             Bullet_SmallRice.image = load_image("Projectiles and Items.png")
+        if (Bullet_SmallRice.sound == None):
+            Bullet_SmallRice.sound = load_wav('se_kira00.wav')
+            Bullet_SmallRice.sound.set_volume(15)
+
         self.image = Bullet_SmallRice.image
 
         super().__init__(x, y, self.image, SMALL_RICE)
         self.frame = bullet_color_table[bullet_color]
+        Bullet_SmallRice.sound.play()
+
 
 class Bullet_Circle(cBullet):
     image = None
-    def __init(self, x, y, bullet_color):
+    def __init__(self, x, y, bullet_color):
         if(Bullet_Circle.image == None):
             Bullet_Circle.image = load_image("Projectiles and Items.png")
         self.image = Bullet_Circle.image

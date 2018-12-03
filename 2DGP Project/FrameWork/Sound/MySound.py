@@ -18,10 +18,9 @@ Sound_Effect_PlayerDead = None # se_pldead00.wav
 Sound_Effect_Timeout = None # se_timeout.wav
 
 if Sound_BGM_Stage1 == None:
-
-    Sound_BGM_Stage1 = load_music("voyage_1969.mp3")
+    Sound_BGM_Stage1 = load_music('voyage_1969.mp3')
 if Sound_BGM_Stage1_Boss == None:
-    Sound_BGM_Stage1_Boss = load_music("se_tan00.wav")
+    Sound_BGM_Stage1_Boss = load_music("Master_Spark.mp3")
 
 if Sound_Bullet_Pong == None:
     Sound_Bullet_Pong = load_wav("se_tan00.wav")

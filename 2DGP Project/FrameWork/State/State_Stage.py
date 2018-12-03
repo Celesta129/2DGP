@@ -6,6 +6,7 @@ from FrameWork.CPlayer import cPlayer
 from FrameWork import Game_World
 from FrameWork.Calculator import *
 from FrameWork.Class.Enemy import Enemy_Generator
+
 name = "State_Stage"
 
 image_Main_BG = None
@@ -26,6 +27,8 @@ cur_stage_number = STAGE1
 
 enemy_info_array = []
 cur_stage_timeAcc = 0.0
+bgm = None
+
 # stage = 480 * 550 pixel
 # 1 pixel = 3.57 cm
 def enter():
@@ -34,6 +37,8 @@ def enter():
     global Stage_image
     global image_sidebar
     global test_enemy
+    global bgm
+
     if player == None:
         player = cPlayer(240,100)
 
@@ -51,6 +56,7 @@ def enter():
     Game_World.add_object(player, Game_World.layer_player)
 
     change_stage(cur_stage_number)
+
 
 def exit():
     Game_World.clear()
@@ -218,6 +224,13 @@ def draw_scoreboard():
 def change_stage(stage_num):
     global enemy_info_array
     global cur_stage_number
+    global bgm
+    if stage_num == 0:
+        bgm = load_music('voyage_1969.mp3')
+
+
+    bgm.set_volume(25)
+    bgm.repeat_play()
     cur_stage_number = stage_num
 
     enemy_info_array = Enemy_Generator.read_file(cur_stage_number)
