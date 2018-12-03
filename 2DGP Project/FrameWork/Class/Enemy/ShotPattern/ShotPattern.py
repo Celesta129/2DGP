@@ -1,10 +1,11 @@
 from FrameWork import Game_World
 from FrameWork.Calculator import*
 from FrameWork.CBullet import *
+from FrameWork.Class.Enemy.EnemyClass.BulletGenerator import *
 
 class SP_Aiming_BlueWedge:
     pattern_cycle = 1.5
-    pattern_breaktime = 1.0
+    pattern_breaktime = 0.5
     color = BLUE1
 
     @staticmethod
@@ -110,3 +111,50 @@ class SP_back_blueCircle:
             bullet.velocity[1] = (math.sin(radian) + math.cos(radian)) * speed
             # 여기서 필요한 조정
             Enemy.shoot(bullet)
+
+class SP_Boss1:
+    # Enemy need Bullet Generator
+    pattern_cycle = 1.5
+    pattern_breaktime = 1.5
+    color = BLUE1
+
+    def enter(Enemy):
+        if len(Enemy.bullet_generators) == 0:
+            for i in range(5):
+                generator = BulletGenerator(Enemy)
+                generator.rot += i * 360 / 5
+                generator.dist = 60
+                Enemy.bullet_generators.append(generator)
+
+        Enemy.shot_timer = 0.10
+        Enemy.shot_timer_max = 0.10
+        pass
+
+    def exit(Enemy):
+        pass
+
+    @staticmethod
+    def shot(Enemy):
+
+        color = 0
+        for j in range(len(Enemy.bullet_generators)):
+            if j == 0:
+                color = RED1
+            elif j == 1:
+                color = GREEN1
+            elif j == 2:
+                color = YELLOW1
+            elif j ==3:
+                color = BLUE1
+            else:
+                color = PURPLE1
+            generator = Enemy.bullet_generators[j]
+            bulletlist = [Bullet_SmallStar(generator.x, generator.y, color) for i in range(2)]
+            for i in range(len(bulletlist)):
+                bullet = bulletlist[i]
+                radian = math.radians(generator.rot + 90 * i)
+                speed = 12
+                bullet.velocity[0] = (math.cos(radian) - math.sin(radian)) * speed
+                bullet.velocity[1] = (math.sin(radian) + math.cos(radian)) * speed
+                # 여기서 필요한 조정
+                Enemy.shoot(bullet)

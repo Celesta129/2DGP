@@ -1,5 +1,5 @@
 from pico2d import *
-from FrameWork.State.State_Stage import bgm
+from FrameWork.State.State_Stage import *
 
 from FrameWork import MainFrameWork
 from FrameWork.CObject import *
@@ -17,20 +17,20 @@ name = "class_Boss"
 class Boss(Object):
 
     enemy_image = None
-    LEFT = 10
-    BOTTOM = 38
+    LEFT = 581
+    BOTTOM = 1943
 
-    WIDTH = 20
-    HEIGHT = 24
+    WIDTH = 53
+    HEIGHT = 60
 
-    IMAGE_WIDTH = 32
-    IMAGE_HEIGHT = 32
-    MAX_FRAME = 4
+    IMAGE_WIDTH = 53
+    IMAGE_HEIGHT = 60
+    MAX_FRAME = 1
 
     def __init__(self,x ,y, move_pattern, shot_pattern):
         super().__init__(x,y)
         if Boss.enemy_image == None:
-            Boss.enemy_image = load_image("Enemies & Special Projectiles.png")
+            Boss.enemy_image = load_image("Stage Character Background Text.png")
 
         self.image = Boss.enemy_image
 
@@ -57,9 +57,9 @@ class Boss(Object):
         self.move_pattern = move_pattern
         self.change_move_pattern(move_pattern)
 
-        self.hp = 100
+        self.hp = 500
 
-
+        self.bullet_generators = []
     def update(self):
         MAX_FRAME =  self.max_frame
         TIME_PER_ACTION = 0.5
@@ -72,12 +72,20 @@ class Boss(Object):
         self.shot_timer -= MainFrameWork.frame_time
 
         self.move_pattern.update(self)
-        if self.shot_timer <= 0.0 and self.check_cycle():
+        for generator in self.bullet_generators:
+            generator.update()
+
+        if self.shot_timer <= 0.0 and self.shot_pattern != None and self.check_cycle():
             self.shot_timer = self.shot_timer_max
             self.shot_pattern.shot(self)
 
+    def draw(self):
+        super().draw()
+        for generator in self.bullet_generators:
+            generator.draw()
+
     def check_cycle(self):
-        if self.cur_shot_pattern_time % self.shot_pattern.pattern_cycle < self.shot_pattern.pattern_breaktime:
+        if self.cur_shot_pattern_time % self.shot_pattern.pattern_cycle < self.shot_pattern.pattern_cycle - self.shot_pattern.pattern_breaktime:
             return False
         return True
 
@@ -86,11 +94,15 @@ class Boss(Object):
         pass
 
     def change_shot_pattern(self,shot_pattern):
+        self.hp = 500
         self.cur_shot_pattern_time = 0.0
 
-        self.shot_pattern.exit(self)
+        if self.shot_pattern != None:
+            self.shot_pattern.exit(self)
+
         self.shot_pattern = shot_pattern
-        self.shot_pattern.enter(self)
+        if shot_pattern != None:
+            self.shot_pattern.enter(self)
 
     def change_move_pattern(self,move_pattern):
         self.cur_move_pattern_time = 0.0

@@ -2,6 +2,7 @@ from FrameWork import Game_World
 from FrameWork.Class.Enemy.EnemyClass.Enemy_Zaco_Blue import Zaco_Blue
 from FrameWork.Class.Enemy.EnemyClass.Enemy_Zaco_Red import Zaco_Red
 from FrameWork.Class.Enemy.EnemyClass.Enemy_Zaco_Yellow import Zaco_Yellow
+from FrameWork.Class.Enemy.EnemyClass.Enemy_Boss import Boss
 
 from FrameWork.Class.Enemy.MovePattern.MovePattern import *
 from FrameWork.Class.Enemy.ShotPattern.ShotPattern import *
@@ -13,6 +14,7 @@ def read_file(stage_number):
 
     filename = None
     if stage_number == 0:
+        #filename = "Stage_01.json"
         filename = "Test.json"
     elif stage_number == 1:
         filename = "Stage_02.json"
@@ -33,16 +35,22 @@ ENEMYTYPE, POSX, POSY,MP,SP = range(5)
 
 enemy_table = {"ZACO_BLUE" : Zaco_Blue,
                "ZACO_RED" : Zaco_Red,
-               "ZACO_YELLOW" : Zaco_Yellow
+               "ZACO_YELLOW" : Zaco_Yellow,
+               "BOSS" : Boss
                }
 
 MP_table = {"MP_GO_STRAIGHT" : MP_go_straight,
             "MP_GO_RIGHT" : MP_go_right,
-            "MP_GO_LEFT" : MP_go_left }
+            "MP_GO_LEFT" : MP_go_left,
+            "MP_BOSS1" : MP_Boss_Move1,
+            "MP_BOSS2" : MP_Boss_Move2,
+            "MP_BOSS3" : MP_Boss_Move3
+            }
 
 SP_table = {"SP_AIMING_BLUEWEDGE": SP_Aiming_BlueWedge,
             "SP_360_BUM_SMALLRICE": SP_360_bum_smallrice,
-            "SP_BACK_BLUECIRCLE" : SP_back_blueCircle
+            "SP_BACK_BLUECIRCLE" : SP_back_blueCircle,
+            "SP_NONE" : None
             }
 
 def load_dic_by_json(file):

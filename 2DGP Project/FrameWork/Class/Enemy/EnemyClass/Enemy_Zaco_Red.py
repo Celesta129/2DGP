@@ -54,7 +54,7 @@ class Zaco_Red(Object):
         self.move_pattern = move_pattern
         self.change_move_pattern(move_pattern)
 
-        self.hp = 10
+        self.hp = 5
 
 
     def update(self):
@@ -74,7 +74,7 @@ class Zaco_Red(Object):
             self.shot_pattern.shot(self)
 
     def check_cycle(self):
-        if self.cur_shot_pattern_time % self.shot_pattern.pattern_cycle < self.shot_pattern.pattern_breaktime:
+        if self.cur_shot_pattern_time % self.shot_pattern.pattern_cycle < self.shot_pattern.pattern_cycle - self.shot_pattern.pattern_breaktime:
             return False
         return True
 

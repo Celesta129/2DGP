@@ -12,12 +12,13 @@ black, red, purple, blue, cyan, green, yellow, white = range(8)
 bullet_color_table2 = [black, red, purple, blue, cyan, green, yellow, white]
 
 #bullet_index_name
-RICE, WEDGE, SMALL_RICE, CIRCLE, PLAYER1  = range(5)
+RICE, WEDGE, SMALL_RICE, SMALL_STAR, CIRCLE, PLAYER1  = range(6)
 
 # left, bottom, image_width, image_height, width, height
 bullet_image_table = { RICE : (7, 493, 32, 28, 14,28),
                        WEDGE  :(10, 36, 16, 16, 12,14),
                        SMALL_RICE: (10, 83, 16, 16, 8, 16),
+                       SMALL_STAR: (7, 319, 16, 14, 14, 14),
                        CIRCLE:(10, 67, 16, 16, 16, 16),
                        PLAYER1 : (35,167,40,12, 38,12)
                      }
@@ -67,9 +68,9 @@ class pBullet_normal(cBullet):
     def __init__(self, x, y):
         if(pBullet_normal.image == None):
             pBullet_normal.image = load_image("Players.png")
-        if(pBullet_normal.sound == None):
-            pBullet_normal.sound =  load_wav('se_plst00.wav')
-            pBullet_normal.sound.set_volume(15)
+
+        pBullet_normal.sound =  load_wav('se_plst00.wav')
+        pBullet_normal.sound.set_volume(15)
 
         super().__init__(x,y,self.image , PLAYER1)
         pBullet_normal.sound.play()
@@ -81,9 +82,9 @@ class Bullet_rice(cBullet):
     def __init__(self, x, y, bullet_color):
         if(Bullet_rice.image == None):
             Bullet_rice.image = load_image("Projectiles and Items.png")
-        if (Bullet_rice.sound == None):
-            Bullet_rice.sound = load_wav('se_tan00.wav')
-            Bullet_rice.sound.set_volume(10)
+
+        Bullet_rice.sound = load_wav('se_tan00.wav')
+        Bullet_rice.sound.set_volume(10)
 
         self.image = Bullet_rice.image
 
@@ -96,9 +97,9 @@ class Bullet_Wedge(cBullet):
     def __init__(self, x, y, bullet_color):
         if (Bullet_Wedge.image == None):
             Bullet_Wedge.image = load_image("Projectiles and Items.png")
-        if (Bullet_Wedge.sound == None):
-            Bullet_Wedge.sound = load_wav('se_tan00.wav')
-            Bullet_Wedge.sound.set_volume(10)
+
+        Bullet_Wedge.sound = load_wav('se_tan00.wav')
+        Bullet_Wedge.sound.set_volume(10)
 
         self.image = Bullet_Wedge.image
 
@@ -112,9 +113,9 @@ class Bullet_SmallRice(cBullet):
     def __init__(self, x, y, bullet_color):
         if(Bullet_SmallRice.image == None):
             Bullet_SmallRice.image = load_image("Projectiles and Items.png")
-        if (Bullet_SmallRice.sound == None):
-            Bullet_SmallRice.sound = load_wav('se_kira00.wav')
-            Bullet_SmallRice.sound.set_volume(15)
+
+        Bullet_SmallRice.sound = load_wav('se_kira00.wav')
+        Bullet_SmallRice.sound.set_volume(15)
 
         self.image = Bullet_SmallRice.image
 
@@ -122,18 +123,41 @@ class Bullet_SmallRice(cBullet):
         self.frame = bullet_color_table[bullet_color]
         Bullet_SmallRice.sound.play()
 
+class Bullet_SmallStar(cBullet):
+    image = None
+    sound = None
+    def __init__(self, x, y, bullet_color):
+        if(Bullet_SmallStar.image == None):
+            Bullet_SmallStar.image = load_image("Projectiles and Items.png")
+
+        Bullet_SmallStar.sound = load_wav('se_kira00.wav')
+        Bullet_SmallStar.sound.set_volume(15)
+
+        self.image = Bullet_SmallStar.image
+
+        super().__init__(x, y, self.image, SMALL_STAR)
+        self.radius = 8
+        self.frame = bullet_color_table[bullet_color]
+
+        Bullet_SmallStar.sound.play()
 
 class Bullet_Circle(cBullet):
     image = None
+    sound = None
     def __init__(self, x, y, bullet_color):
         if(Bullet_Circle.image == None):
             Bullet_Circle.image = load_image("Projectiles and Items.png")
+        if (Bullet_Circle.sound == None):
+            Bullet_Circle.sound = load_wav('se_tan00.wav')
+            Bullet_Circle.sound.set_volume(10)
+
         self.image = Bullet_Circle.image
 
         super().__init__(x, y, self.image, CIRCLE)
         self.frame = bullet_color_table[bullet_color]
         self.radius = 8
         self.objectType = "Circle"
+        Bullet_Circle.sound.play()
 
 def InitBullet(Bullet, rot_degree = 0,velocity_x = 0, velocity_y = -1):
     # 속도 단위는 km/h, Bullet

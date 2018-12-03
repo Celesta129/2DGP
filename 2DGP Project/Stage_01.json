@@ -12,10 +12,128 @@
   {    "Time": 5.6,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
   {    "Time": 5.8,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
 
-  {    "Time": 6.0,    "Type": "ZACO_BLUE",    "x": 240,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_360_BUM_SMALLRICE"  },
+  {    "Time": 6.0,    "Type": "ZACO_RED",    "x": 240,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_360_BUM_SMALLRICE"  },
+  
+  {    "Time": 7.0,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 7.2,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 7.4,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 7.6,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 7.8,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
 
+  {    "Time": 9.0,    "Type": "ZACO_RED",    "x": 200,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_360_BUM_SMALLRICE"  },
 
-  {    "Time": 5.0,    "Type": "ZACO_BLUE",    "x": 150,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  }
+  {    "Time": 10.0,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 10.2,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 10.4,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 10.6,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 10.8,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
 
+  {    "Time": 11.0,    "Type": "ZACO_RED",    "x": 320,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_360_BUM_SMALLRICE"  },
+
+  {    "Time": 11.0,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 11.2,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 11.4,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 11.6,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 11.8,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {    "Time": 12.0,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 12.2,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 12.4,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 12.6,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 12.8,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {    "Time": 13.0,    "Type": "ZACO_BLUE",    "x": 0,    "y": 450,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 13.2,    "Type": "ZACO_BLUE",    "x": 0,    "y": 450,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 13.4,    "Type": "ZACO_BLUE",    "x": 0,    "y": 450,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 13.6,    "Type": "ZACO_BLUE",    "x": 0,    "y": 450,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 13.8,    "Type": "ZACO_BLUE",    "x": 0,    "y": 450,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {    "Time": 17.0,    "Type": "ZACO_YELLOW",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
+  {    "Time": 22.0,    "Type": "ZACO_YELLOW",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
+  
+  {    "Time": 24.0,    "Type": "ZACO_BLUE",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 24.2,    "Type": "ZACO_BLUE",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 24.4,    "Type": "ZACO_BLUE",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 24.6,    "Type": "ZACO_BLUE",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 24.8,    "Type": "ZACO_BLUE",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 25.0,    "Type": "ZACO_BLUE",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 25.2,    "Type": "ZACO_BLUE",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 25.4,    "Type": "ZACO_BLUE",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 25.6,    "Type": "ZACO_BLUE",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 25.8,    "Type": "ZACO_BLUE",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {    "Time": 28.0,    "Type": "ZACO_YELLOW",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
+
+  {    "Time": 31.0,    "Type": "ZACO_BLUE",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 31.2,    "Type": "ZACO_BLUE",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 31.4,    "Type": "ZACO_BLUE",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 31.6,    "Type": "ZACO_BLUE",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 31.8,    "Type": "ZACO_BLUE",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 32.0,    "Type": "ZACO_BLUE",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 32.2,    "Type": "ZACO_BLUE",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 32.4,    "Type": "ZACO_BLUE",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 32.6,    "Type": "ZACO_BLUE",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 32.8,    "Type": "ZACO_BLUE",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  
+  {    "Time": 35.0,    "Type": "ZACO_YELLOW",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
+  {    "Time": 35.0,    "Type": "ZACO_YELLOW",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
+
+  {    "Time": 41.0,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 41.2,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 41.4,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 41.6,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 41.8,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {    "Time": 42.0,    "Type": "ZACO_RED",    "x": 160,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_360_BUM_SMALLRICE"  },
+
+  {    "Time": 43.0,    "Type": "ZACO_BLUE",    "x": 480,    "y": 550,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 43.0,    "Type": "ZACO_RED",    "x": 240,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_360_BUM_SMALLRICE"  },
+  {    "Time": 43.2,    "Type": "ZACO_BLUE",    "x": 480,    "y": 550,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 43.4,    "Type": "ZACO_BLUE",    "x": 480,    "y": 550,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 43.6,    "Type": "ZACO_BLUE",    "x": 480,    "y": 550,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 43.8,    "Type": "ZACO_BLUE",    "x": 480,    "y": 550,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {    "Time": 44.0,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 44.2,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 44.4,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 44.6,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 44.8,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {    "Time": 47.0,    "Type": "ZACO_RED",    "x": 200,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_360_BUM_SMALLRICE"  },
+
+  {    "Time": 47.0,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 47.2,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 47.4,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 47.6,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 47.8,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {    "Time": 50.0,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 50.2,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 50.4,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 50.6,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 50.8,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {    "Time": 51.0,    "Type": "ZACO_RED",    "x": 200,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_360_BUM_SMALLRICE"  },
+
+  {    "Time": 52.0,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 52.2,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 52.4,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 52.6,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 52.8,    "Type": "ZACO_BLUE",    "x": 480,    "y": 500,    "MP": "MP_GO_LEFT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {    "Time": 53.0,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 53.2,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 53.4,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 53.6,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+  {    "Time": 53.8,    "Type": "ZACO_BLUE",    "x": 0,    "y": 500,    "MP": "MP_GO_RIGHT",    "SP": "SP_AIMING_BLUEWEDGE"  },
+
+  {    "Time": 56.0,    "Type": "ZACO_YELLOW",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
+  {    "Time": 58.0,    "Type": "ZACO_YELLOW",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
+  
+  {    "Time": 60.0,    "Type": "ZACO_YELLOW",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
+  {    "Time": 61.0,    "Type": "ZACO_YELLOW",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
+
+  {    "Time": 65.0,    "Type": "ZACO_YELLOW",    "x": 80,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  },
+  {    "Time": 65.0,    "Type": "ZACO_YELLOW",    "x": 400,    "y": 550,    "MP": "MP_GO_STRAIGHT",    "SP": "SP_BACK_BLUECIRCLE"  }
 ]
 

@@ -229,7 +229,7 @@ def change_stage(stage_num):
         bgm = load_music('voyage_1969.mp3')
 
 
-    bgm.set_volume(25)
+    bgm.set_volume(30)
     bgm.repeat_play()
     cur_stage_number = stage_num
 

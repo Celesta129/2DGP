@@ -4,7 +4,7 @@ from FrameWork import CObject
 def collision_circle_circle(ob1, ob2):
     dist = cal_dist(ob1, ob2)
 
-    radius = ob1.width
+    radius = ob1.radius
     if dist < radius:
         return True
     else:
@@ -85,9 +85,45 @@ def collision_line_line(line1, line2):
 def cal_dist(pt1, pt2):
     dist = math.sqrt((pt2.x - pt1.x)**2 + (pt2.y - pt1.y)**2)
     return dist
+def cal_dist2(pt1_x, pt1_y, pt2_x, pt2_y):
+    dist = math.sqrt((pt2_x - pt1_x)**2 + (pt2_y - pt1_y)**2)
+    return dist
 
-def collision_rect_circle(ob1,ob2):
+def collision_rect_circle(rect,circle):
+    radian = math.radians(rect.rot)
+    cos = math.cos(radian)
+    sin = math.sin(radian)
+    dx = circle.x - rect.x
+    dy = circle.y - rect.y
 
+    vx = rect.x + cos * dx - sin * dy
+    vy = rect.y + sin * dx + cos * dy
+
+    left,right = rect.x - rect.width/2, rect.x + rect.width/2
+    top, bottom = rect.y + rect.height/2, rect.y - rect.height/2
+
+    if (left < vx and vx < right) and (bottom < vy and vy < top):
+        return True
+
+    if cal_dist2(left,bottom,vx,vy) < circle.radius:
+        return True
+    elif cal_dist2(left,top,vx,vy) < circle.radius:
+        return True
+    elif cal_dist2(right,bottom, vx,vy) < circle.radius:
+        return True
+    elif cal_dist2(right,top,vx,vy) < circle.radius:
+        return True
+
+
+    # x,y 조건 넣어야함.?
+    if cal_dist2(rect.x, rect.y, vx, vy) < rect.width / 2:
+        return True
+    if cal_dist2(rect.x, rect.y, vx, vy) < rect.height / 2:
+        return True
+
+
+
+    #print("collision rect_circle")
     return False
 
 

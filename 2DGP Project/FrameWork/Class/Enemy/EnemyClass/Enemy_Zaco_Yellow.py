@@ -88,7 +88,7 @@ class Zaco_Yellow(Object):
             self.shot_pattern.shot(self)
 
     def check_cycle(self):
-        if self.cur_shot_pattern_time < self.shot_pattern.pattern_cycle - self.shot_pattern.pattern_breaktime:
+        if self.cur_shot_pattern_time %  self.shot_pattern.pattern_cycle < self.shot_pattern.pattern_cycle - self.shot_pattern.pattern_breaktime:
             return False
         return True
 
